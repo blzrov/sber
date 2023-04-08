@@ -1,5 +1,5 @@
 import MaterialTable from "material-table";
-import { localization, tableIcons, options } from "../helpers/table";
+import { localization, icons, options } from "../helpers/table";
 
 export default function Table() {
   const data = [
@@ -16,6 +16,6 @@ export default function Table() {
     { title: "Birth Year", field: "birthYear" },
   ];
   return (
-    <MaterialTable options={options} icons={tableIcons} localization={localization} columns={columns} data={data} />
+    <MaterialTable options={options} icons={icons} localization={localization} columns={columns} data={data} />
   );
 }
