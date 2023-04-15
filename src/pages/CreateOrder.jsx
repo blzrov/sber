@@ -11,6 +11,9 @@ export default function CreateOrder() {
       deadline: new Date(),
       description: "",
     },
+    validate: {
+        name: (value) => value.length > 0 ? null : 'Введите название заказа'
+    }
   });
 
   return (
