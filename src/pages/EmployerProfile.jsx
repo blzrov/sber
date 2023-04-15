@@ -13,15 +13,14 @@ export default function EmployerProfile() {
             Сбербанк
           </Title>
           <Text>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem
-            distinctio ullam illo facilis reprehenderit non quibusdam inventore
-            debitis odit nostrum saepe, ex excepturi qui. Sunt dolor ratione ab
-            dolores iure!
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem distinctio ullam illo facilis reprehenderit
+            non quibusdam inventore debitis odit nostrum saepe, ex excepturi qui. Sunt dolor ratione ab dolores iure!
           </Text>
         </Col>
       </Row>
       <Row>
         <h2>Вакансии</h2>
+        <Button color="green">Добавить вакансию</Button>
         <SimpleGrid>
           <Card shadow="sm" padding="lg" radius="md" withBorder>
             <Title order={3}>Название</Title>
@@ -29,36 +28,9 @@ export default function EmployerProfile() {
               З/п 10000р.
             </Title>
             <Text mb="md">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore
-              necessitatibus ullam maxime commodi impedit a asperiores eaque
-              officia. Repudiandae cum velit iusto quas quia, earum omnis
-              nostrum tempora qui labore.
-            </Text>
-            <Button color="green">Подробнее</Button>
-          </Card>
-          <Card shadow="sm" padding="lg" radius="md" withBorder>
-            <Title order={3}>Название</Title>
-            <Title order={5} mb="xs">
-              З/п 10000р.
-            </Title>
-            <Text mb="md">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore
-              necessitatibus ullam maxime commodi impedit a asperiores eaque
-              officia. Repudiandae cum velit iusto quas quia, earum omnis
-              nostrum tempora qui labore.
-            </Text>
-            <Button color="green">Подробнее</Button>
-          </Card>
-          <Card shadow="sm" padding="lg" radius="md" withBorder>
-            <Title order={3}>Название</Title>
-            <Title order={5} mb="xs">
-              З/п 10000р.
-            </Title>
-            <Text mb="md">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore
-              necessitatibus ullam maxime commodi impedit a asperiores eaque
-              officia. Repudiandae cum velit iusto quas quia, earum omnis
-              nostrum tempora qui labore.
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore necessitatibus ullam maxime commodi
+              impedit a asperiores eaque officia. Repudiandae cum velit iusto quas quia, earum omnis nostrum tempora qui
+              labore.
             </Text>
             <Button color="green">Подробнее</Button>
           </Card>

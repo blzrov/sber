@@ -6,32 +6,29 @@ import { Link } from "react-router-dom";
 export default function Header() {
   return (
     <Navbar collapseOnSelect expand="lg">
-      <Navbar.Brand href="#home">
-        <Link to="/">Сбербанк</Link>
+      <Navbar.Brand>
+        <Link to="/">Дом</Link>
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="me-auto">
           <Nav.Link>
-            <Link to="/">Вакансии</Link>
+            <Link to="/auth">Авторизация</Link>
           </Nav.Link>
           <Nav.Link>
             <Link to="/">Работадатели</Link>
           </Nav.Link>
           <Nav.Link>
-            <Link to="/">Фриланс</Link>
+            <Link to="/employer/1">employer</Link>
           </Nav.Link>
           <Nav.Link>
-            <Link to="/courses">Тесты</Link>
+            <Link to="/courses">courses</Link>
           </Nav.Link>
           <Nav.Link>
-            <Link to="/employer/1">Работа</Link>
+            <Link to="/customer/1">Фриланс</Link>
           </Nav.Link>
           <Nav.Link>
-            <Link to="/applicant/1">Соискатель</Link>
-          </Nav.Link>
-          <Nav.Link>
-            <Link to="/applicant/1">Реестр соискателей</Link>
+            <Link to="/mentor/1">Реестр соискателей</Link>
           </Nav.Link>
           <Nav.Link>
             <Link to="/mentor/1">Ментор</Link>
@@ -46,7 +43,7 @@ export default function Header() {
         </Nav>
         <Nav>
           <Nav.Link>
-            <Link to="/sdhome">Профиль</Link>
+            <Link to="/applicant/1">Профиль</Link>
           </Nav.Link>
         </Nav>
       </Navbar.Collapse>
