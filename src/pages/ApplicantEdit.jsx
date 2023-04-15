@@ -4,8 +4,11 @@ import { Dropzone } from "@mantine/dropzone";
 import { IconUpload, IconPhoto, IconX } from "@tabler/icons-react";
 import { TextInput, Textarea, Checkbox, Button, Group, Text, rem, MultiSelect } from "@mantine/core";
 import { DateInput, MonthPickerInput, YearPickerInput } from "@mantine/dates";
+import { useNavigate } from "react-router-dom";
 
 export default function ApplicantEdit() {
+  const navigate = useNavigate();
+
   return (
     <div>
       <h3>Редактирование резюме</h3>
@@ -96,6 +99,7 @@ export default function ApplicantEdit() {
       <div>
         <Checkbox label="На данный момент я ищу работу" color="green" size="md" />
         <Group position="right" mt="md">
+          <Button onClick={() => navigate("/applicant/1")}>Отмена</Button>
           <Button color="green">Сохранить</Button>
         </Group>
       </div>

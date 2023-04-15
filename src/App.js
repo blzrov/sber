@@ -16,9 +16,9 @@ import Header from "./components/Header";
 export default function App() {
   const navigate = useNavigate()
   useEffect(() => {
-    if(!localStorage.getItem('user')){
-      navigate('/auth')
-    }
+    // if(!localStorage.getItem('user')){
+    //   navigate('/auth')
+    // }
   }, [])
 
   return (
