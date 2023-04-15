@@ -20,7 +20,7 @@ export default function EmployerProfile() {
               </Title>
             </Col>
             <Col md={4} className="d-flex align-items-center">
-              <Button color="green">Редактировать профиль</Button>
+              <Button color="green" onClick={() => navigate('/employer/edit')}>Редактировать профиль</Button>
             </Col>
           </Row>
           <Text>
