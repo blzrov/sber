@@ -7,7 +7,7 @@ export default function Vacancys() {
   const [data, setData] = useState([]);
 
   useEffect(async () => {
-    const response = await fetch("http://100.73.198.48:8000/api/vacancys/");
+    const response = await fetch("http://100.73.198.48:8000/api/vacancies/");
     const data = await response.json();
     setData(data);
   }, []);
