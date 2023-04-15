@@ -15,9 +15,13 @@ import Header from "./components/Header";
 import MentorProfile from "./pages/MentorProfile";
 import Test from "./pages/Test";
 import CreateVacancy from "./pages/CreateVacancy";
+import Applicants from "./pages/Applicants";
 import CreateOrder from "./pages/CreateOrder";
+import Employers from "./pages/Employers";
+import Vacancys from "./pages/Vacancys";
 import OrderCard from "./pages/OrderCard";
 import VacancyCard from "./pages/VacancyCard";
+import Orders from "./pages/Orders"
 
 export default function App() {
   const navigate = useNavigate();
@@ -35,17 +39,21 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="*" element={<Error />} />
           <Route path="/auth" element={<Authorization />} />
+          <Route path="/applicants" element={<Applicants />} />
           <Route path="/applicant/:id" element={<ApplicantProfile />} />
           <Route path="/applicant/edit" element={<ApplicantEdit />} />
           <Route path="/employer/:id" element={<EmployerProfile />} />
+          <Route path="/employers" element={<Employers />} />
           <Route path="/courses" element={<Courses />} />
           <Route path="/courses/:id" element={<Test />} />
           <Route path="/customer/:id" element={<CustomerProfile />} />
           <Route path="/vacancy/new" element={<CreateVacancy />} />
-          <Route path="/create-order" element={<CreateOrder/>}/>
+          <Route path="/vacancys" element={<Vacancys />} />
+          <Route path="/create-order" element={<CreateOrder />} />
           <Route path="/mentor/:id" element={<MentorProfile />} />
-          <Route path="/order-card/:id" element={<OrderCard/>}/>
-          <Route path="/vacancy-card/:id" element={<VacancyCard/>}/>
+          <Route path="/order-card/:id" element={<OrderCard />} />
+          <Route path="/orders" element={<Orders />} />
+          <Route path="/vacancy-card/:id" element={<VacancyCard />} />
         </Routes>
       </div>
     </Container>

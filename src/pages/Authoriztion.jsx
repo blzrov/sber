@@ -17,7 +17,7 @@ export default function Authorization() {
         if (value.length === 0) {
           return "Введите пароль";
         }
-        if (value.length < 6) {
+        if (value.length < 4) {
           return "Минимальная длина 6 символов";
         }
         return null;
@@ -48,14 +48,25 @@ export default function Authorization() {
 
   return (
     <Row className="my-auto">
-      <Col md={3} className="mx-auto">
+      <Col md={6} className="mx-auto">
         {authState === "login" && (
           <>
             <h2 className="text-center">Вход</h2>
             <form
-              onSubmit={authForm.onSubmit((values) => {
-                console.log(values);
-                authForm.reset();
+              onSubmit={authForm.onSubmit(async (values) => {
+                const response = await fetch("http://100.73.198.48:8000/api/auth/login/", {
+                  headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                  },
+                  method: "POST",
+                  body: JSON.stringify(values),
+                });
+                const result = await response.json();
+                if (result.id) {
+                  localStorage.setItem("user", JSON.stringify(result));
+                  console.log(JSON.parse(localStorage.getItem("user")));
+                }
               })}
             >
               <TextInput
@@ -99,7 +110,6 @@ export default function Authorization() {
             <h2 className="text-center">Регистрация</h2>
             <form
               onSubmit={registrationForm.onSubmit(async (values) => {
-                console.log(values);
                 const response = await fetch("http://100.73.198.48:8000/api/auth/registration/", {
                   headers: {
                     "Content-Type": "application/json",
@@ -110,6 +120,10 @@ export default function Authorization() {
                 });
                 const result = await response.json();
                 console.log(result);
+                if (result.id) {
+                  localStorage.setItem("user", JSON.stringify(result));
+                  console.log(localStorage);
+                }
               })}
             >
               <TextInput
