@@ -1,4 +1,4 @@
-import { Group, TextInput } from "@mantine/core";
+import { Group, PasswordInput, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { Button, Select } from "@mantine/core";
 import { Row, Col } from "react-bootstrap";
@@ -67,11 +67,10 @@ export default function Authorization() {
                 radius="md"
               />
 
-              <TextInput
+              <PasswordInput
                 label="Пароль"
                 placeholder="Ваш пароль"
                 {...authForm.getInputProps("password")}
-                type="password"
                 withAsterisk
                 size="lg"
                 radius="md"
@@ -113,11 +112,10 @@ export default function Authorization() {
                 radius="md"
               />
 
-              <TextInput
+              <PasswordInput
                 label="Пароль"
                 placeholder="Ваш пароль"
                 {...registrationForm.getInputProps("password")}
-                type="password"
                 withAsterisk
                 size="lg"
                 radius="md"
