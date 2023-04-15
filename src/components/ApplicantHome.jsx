@@ -20,7 +20,7 @@ export default function ApplicantHome() {
             radius="md"
             withBorder
             style={{
-              background: "linear-gradient(70deg ,#F5F186, #FCD000)",
+              background: "linear-gradient(70deg , rgba(245, 241, 134, 0.6), rgba(252, 208, 0, 0.6))",
               height: "200px",
               cursor: 'pointer'
             }}
@@ -36,7 +36,7 @@ export default function ApplicantHome() {
             radius="md"
             withBorder
             style={{
-              background: "linear-gradient(to left ,#9DFBC8, #FCD000)",
+              background: "linear-gradient(to left ,rgba(157, 251, 200, 0.6), rgba(252, 208, 0, 0.6))",
               height: "200px",
               cursor: 'pointer'
             }}
@@ -52,7 +52,7 @@ export default function ApplicantHome() {
             radius="md"
             withBorder
             style={{
-              background: "linear-gradient(70deg ,#9DFBC8, #98DE5B)",
+              background: "linear-gradient(70deg ,rgba(157, 251, 200, 0.6), rgba(152, 222, 91, 0.6))",
               height: "200px",
               cursor: 'pointer'
             }}
