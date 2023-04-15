@@ -1,9 +1,18 @@
 import { SimpleGrid, Card, Image, Title, Text, Button } from "@mantine/core";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Courses() {
   const navigate = useNavigate();
+  const [courses, setCourses] = useState([])
+
+  useEffect(async () => {
+    const response = await fetch("http://100.73.198.48:8000/api/courses/");
+    const data = await response.json()
+    console.log(data)
+  }, [])
   
+
   return (
     <div>
       <h3>Направления</h3>
