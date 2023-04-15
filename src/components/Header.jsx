@@ -26,16 +26,18 @@ export default function Header() {
               <Link to="/vacancys">Вакансии</Link>
             </Nav.Link>
           )}
-          {user?.role === roles.applicant && (
-            <Nav.Link>
-              <Link to="/courses">Тесты</Link>
-            </Nav.Link>
-          )}
-          {false && (
+          {user?.role === roles.employer && (
             <Nav.Link>
               <Link to="/applicants">Соискатели</Link>
             </Nav.Link>
           )}
+          {user?.role === roles.applicant ||
+            (user?.role === roles.employer && (
+              <Nav.Link>
+                <Link to="/courses">Тесты</Link>
+              </Nav.Link>
+            ))}
+
           {user?.role === roles.applicant && (
             <Nav.Link>
               <Link to="/orders">Фриланс</Link>
@@ -71,7 +73,9 @@ export default function Header() {
           {user && (
             <Nav.Link>
               {user.role === roles.applicant && <Link to="/applicant/1">Профиль</Link>}
-              {user.role === roles.customer && <Link to="/customer/1">Профиль</Link>}
+              {user.role === roles.customer && <Link to="/customer/1">Управление</Link>}
+              {user?.role === roles.employer && <Link to="/employer/1">Управление</Link>}
+              {user?.role === roles.mentor && <Link to="/mentor/1">Управление</Link>}
             </Nav.Link>
           )}
         </Nav>
