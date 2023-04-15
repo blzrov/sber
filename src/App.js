@@ -15,6 +15,7 @@ import Header from "./components/Header";
 import MentorProfile from "./pages/MentorProfile";
 import Test from "./pages/Test";
 import CreateVacancy from "./pages/CreateVacancy";
+import Applicants from "./pages/Applicants";
 
 export default function App() {
   const navigate = useNavigate();
@@ -32,6 +33,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="*" element={<Error />} />
           <Route path="/auth" element={<Authorization />} />
+          <Route path="/applicants" element={<Applicants />} />
           <Route path="/applicant/:id" element={<ApplicantProfile />} />
           <Route path="/applicant/edit" element={<ApplicantEdit />} />
           <Route path="/employer/:id" element={<EmployerProfile />} />

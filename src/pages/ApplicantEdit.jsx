@@ -11,6 +11,19 @@ import WorkExpItem from "../components/WorkExpItem";
 export default function ApplicantEdit() {
   const navigate = useNavigate();
   const [info, setInfo] = useState({ workExp: [{}] });
+  const [img, setImg] = useState("");
+
+  function handleImg(files) {
+    console.log(files);
+    const file = files[0];
+    const fileReader = new FileReader();
+    fileReader.onload = () => {
+      const srcData = fileReader.result;
+      console.log(srcData);
+      setImg(srcData);
+    };
+    setImg(fileReader.readAsDataURL(file));
+  }
 
   function handleSubmit() {
     console.log(info);
@@ -19,12 +32,14 @@ export default function ApplicantEdit() {
   return (
     <div>
       <h3>Редактирование резюме</h3>
+      {/* <img src={img} /> */}
+      <img src={img} />
       <Row className="mb-2">
         <Col md={3}>
           <h4>Фото</h4>
           <Dropzone
             maxSize={3 * 1024 ** 2}
-            onDrop={(files) => console.log("accepted files", files)}
+            onDrop={(files) => handleImg(files)}
             onReject={(files) => console.log("rejected files", files)}
           >
             <Group position="center" spacing="xl" style={{ minHeight: rem(220), pointerEvents: "none" }}>

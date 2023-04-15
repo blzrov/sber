@@ -48,7 +48,7 @@ export default function Authorization() {
 
   return (
     <Row className="my-auto">
-      <Col md={3} className="mx-auto">
+      <Col md={6} className="mx-auto">
         {authState === "login" && (
           <>
             <h2 className="text-center">Вход</h2>
@@ -110,6 +110,9 @@ export default function Authorization() {
                 });
                 const result = await response.json();
                 console.log(result);
+                if (result.id) {
+                  localStorage.setItem(JSON.stringify(result));
+                }
               })}
             >
               <TextInput

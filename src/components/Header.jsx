@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 export default function Header() {
   return (
-    <Navbar collapseOnSelect expand="lg">
+    <Navbar style={{ borderBottom: "1px solid green", marginBottom: "16px" }} collapseOnSelect expand="md">
       <Navbar.Brand>
         <Link to="/">Дом</Link>
       </Navbar.Brand>
@@ -13,35 +13,35 @@ export default function Header() {
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="me-auto">
           <Nav.Link>
-            <Link to="/auth">Авторизация</Link>
+            <Link to="/">Все вакансии</Link>
           </Nav.Link>
           <Nav.Link>
-            <Link to="/">Работадатели</Link>
+            <Link to="/">Компании</Link>
           </Nav.Link>
           <Nav.Link>
-            <Link to="/employer/1">employer</Link>
+            <Link to="/courses">Тесты</Link>
           </Nav.Link>
           <Nav.Link>
-            <Link to="/courses">courses</Link>
-          </Nav.Link>
-          <Nav.Link>
-            <Link to="/customer/1">Фриланс</Link>
-          </Nav.Link>
-          <Nav.Link>
-            <Link to="/mentor/1">Реестр соискателей</Link>
-          </Nav.Link>
-          <Nav.Link>
-            <Link to="/mentor/1">Ментор</Link>
+            <Link to="/applicants">Соискатели</Link>
           </Nav.Link>
           <NavDropdown title="Остальное" id="collasible-nav-dropdown">
-            <NavDropdown.Item>Action</NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+            <NavDropdown.Item>
+              <Link to="/employer/1">Работадатель</Link>
+            </NavDropdown.Item>
+            <NavDropdown.Item>
+              <Link to="/mentor/1">Ментор</Link>
+            </NavDropdown.Item>
+            <NavDropdown.Item>
+              <Link to="/customer/1">Заказчик</Link>
+            </NavDropdown.Item>
             <NavDropdown.Divider />
-            <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+            <NavDropdown.Item>Separated link</NavDropdown.Item>
           </NavDropdown>
         </Nav>
         <Nav>
+          <Nav.Link>
+            <Link to="/auth">Авторизация</Link>
+          </Nav.Link>
           <Nav.Link>
             <Link to="/applicant/1">Профиль</Link>
           </Nav.Link>
