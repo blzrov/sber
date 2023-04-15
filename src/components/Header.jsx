@@ -42,8 +42,7 @@ export default function Header() {
           </NavDropdown>
         </Nav>
         <Nav>
-          <Nav.Link href="#deets">More deets</Nav.Link>
-          <Nav.Link eventKey={2}>
+          <Nav.Link>
             <Link to="/sdhome">Профиль</Link>
           </Nav.Link>
         </Nav>

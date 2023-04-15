@@ -5,10 +5,18 @@ import { IconUpload, IconPhoto, IconX } from "@tabler/icons-react";
 import { TextInput, Textarea, Checkbox, Button, Group, Text, rem, MultiSelect } from "@mantine/core";
 import { DateInput, MonthPickerInput, YearPickerInput } from "@mantine/dates";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 export default function ApplicantEdit() {
   const navigate = useNavigate();
+  const [info, setInfo] = useState({});
 
+  function handleChange(e) {
+    setInfo((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  }
+  function handleSubmit() {
+    console.log(info);
+  }
   return (
     <div>
       <h3>Редактирование резюме</h3>
@@ -40,7 +48,7 @@ export default function ApplicantEdit() {
         </Col>
         <Col md={5}>
           <h4>Личная информация</h4>
-          <TextInput placeholder="Иванов" label="Фамилия" />
+          <TextInput onChange={handleChange} name="name" placeholder="Иванов" label="Фамилия" />
           <TextInput placeholder="Иван" label="Имя" />
           <TextInput placeholder="Иванович" label="Отчество" />
           <DateInput label="Дата рождения" placeholder="Введите дату рождения" onChange={(e) => console.log(e)} />
@@ -100,7 +108,7 @@ export default function ApplicantEdit() {
         <Checkbox label="На данный момент я ищу работу" color="green" size="md" />
         <Group position="right" mt="md">
           <Button onClick={() => navigate("/applicant/1")}>Отмена</Button>
-          <Button color="green">Сохранить</Button>
+          <Button onClick={handleSubmit} color="green">Сохранить</Button>
         </Group>
       </div>
     </div>
