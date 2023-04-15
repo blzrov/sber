@@ -136,7 +136,7 @@ export default function ApplicantEdit() {
             setInfo((prev) => ({ ...prev, city: e.target.value }))
           }
           name="city"
-          placeholder="Екатеринбург"
+          placeholder="Москва"
           label="Город"
         />
         <TextInput
@@ -217,7 +217,7 @@ export default function ApplicantEdit() {
           </Row>
         </Col>
       </Row>
-      <div>
+      <div className="mb-5">
         <Checkbox
           value={info.isSearch}
           onChange={(e) =>

@@ -2,25 +2,32 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@mantine/core";
+import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { getUser } from "../helpers/user";
 
 export default function ApplicantProfile() {
+  const [info, setInfo] = useState({});
+  const { id } = useParams();
   const navigate = useNavigate();
+
+  useEffect(async () => {
+    const response = await fetch(`http://100.73.198.48:8000/api/user/${id}`);
+    const data = await response.json();
+    setInfo(data);
+  }, []);
+
   return (
     <div>
-      <Button onClick={() => navigate("/applicant/edit")}>
-        Редактировать профиль
-      </Button>
       <Row>
-        <Col md={3}>Картинка</Col>
-        <Col md={5}>
-          <h3>Личная информация</h3>
-          <div>Фамилия</div>
-          <div>Имя</div>
-          <div>Отчество</div>
+        <Col md={4}>Картинка</Col>
+        <Col md={8}>
+          <div className="d-flex justify-content-between">
+            <h3>Личная информация</h3>
+            {getUser().id == id && <Button onClick={() => navigate("/applicant/edit")}>Редактировать профиль</Button>}
+          </div>
+          <div>{`${info.surname} ${info.name} ${info.patronymic}`}</div>
           <div>Возраст</div>
-        </Col>
-        <Col md={3}>
-          <div>Контакты</div>
         </Col>
       </Row>
       <Row className="mb-2">
@@ -34,7 +41,7 @@ export default function ApplicantProfile() {
         <Col md={3}>Конец обучения</Col>
         <Col md={6}>Место обучения</Col>
       </Row>
-      <Row>
+      <Row className="mb-2">
         <h3>Опыт работы</h3>
         <Col md={3}>Начало работы</Col>
         <Col md={3}>Конец работы</Col>
