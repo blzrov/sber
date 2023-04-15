@@ -2,16 +2,37 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Dropzone } from "@mantine/dropzone";
 import { IconUpload, IconPhoto, IconX } from "@tabler/icons-react";
-import { TextInput, Textarea, Checkbox, Button, Group, Text, rem, MultiSelect } from "@mantine/core";
+import {
+  TextInput,
+  Textarea,
+  Checkbox,
+  Button,
+  Group,
+  Text,
+  rem,
+  MultiSelect,
+} from "@mantine/core";
 import { DateInput, MonthPickerInput, YearPickerInput } from "@mantine/dates";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import WorkExpItem from "../components/WorkExpItem";
+import { getUser } from "../helpers/user";
 
 export default function ApplicantEdit() {
   const navigate = useNavigate();
-  const [info, setInfo] = useState({ workExp: [{}] });
+  const [info, setInfo] = useState({ experience: [{}] });
   const [img, setImg] = useState("");
+  const [skills, setSkills] = useState([]);
+
+  useEffect(async () => {
+    const response = await fetch("http://100.73.198.48:8000/api/skills/");
+    const data = await response.json();
+    setSkills(
+      data.map((v) => {
+        return { value: v.name, label: v.name };
+      })
+    );
+  }, []);
 
   function handleImg(files) {
     const file = files[0];
@@ -26,8 +47,18 @@ export default function ApplicantEdit() {
     setImg(base64);
   }
 
-  function handleSubmit() {
-    console.log(info);
+  async function handleSubmit() {
+    const data = { ...info, id: getUser().id };
+    console.log(data)
+    const response = await fetch("http://100.73.198.48:8000/api/user/", {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      method: "PATCH",
+      body: JSON.stringify(data),
+    });
+    console.log(response)
   }
 
   return (
@@ -41,7 +72,11 @@ export default function ApplicantEdit() {
             onDrop={(files) => handleImg(files)}
             onReject={(files) => console.log("rejected files", files)}
           >
-            <Group position="center" spacing="xl" style={{ minHeight: rem(220), pointerEvents: "none" }}>
+            <Group
+              position="center"
+              spacing="xl"
+              style={{ minHeight: rem(220), pointerEvents: "none" }}
+            >
               {!img && <IconUpload size="3.2rem" stroke={1.5} />}
               <div>
                 {img && <img src={img} width={200} height={200} />}
@@ -57,25 +92,38 @@ export default function ApplicantEdit() {
         <Col md={5}>
           <h4>Личная информация</h4>
           <TextInput
-            onChange={(e) => setInfo((prev) => ({ ...prev, [e.target.name]: e.target.value }))}
+            onChange={(e) =>
+              setInfo((prev) => ({ ...prev, [e.target.name]: e.target.value }))
+            }
             name="name"
             placeholder="Иванов"
             label="Фамилия"
           />
           <TextInput
-            onChange={(e) => setInfo((prev) => ({ ...prev, [e.target.name]: e.target.value }))}
+            onChange={(e) =>
+              setInfo((prev) => ({ ...prev, [e.target.name]: e.target.value }))
+            }
             name="surname"
             placeholder="Иван"
             label="Имя"
           />
           <TextInput
-            onChange={(e) => setInfo((prev) => ({ ...prev, [e.target.name]: e.target.value }))}
+            onChange={(e) =>
+              setInfo((prev) => ({ ...prev, [e.target.name]: e.target.value }))
+            }
             name="patronymic"
             placeholder="Иванович"
             label="Отчество"
           />
           <DateInput
-            onChange={(e) => setInfo((prev) => ({ ...prev, dateBirth: e }))}
+            onChange={(e) =>
+              setInfo((prev) => ({
+                ...prev,
+                birth_date: `${e.getFullYear()}-${
+                  e.getMonth() + 1
+                }-${e.getDate()}`,
+              }))
+            }
             label="Дата рождения"
             placeholder="Введите дату рождения"
           />
@@ -89,13 +137,25 @@ export default function ApplicantEdit() {
       <Row className="mb-2">
         <h4>Подробнее о вас</h4>
         <TextInput
-          onChange={(e) => setInfo((prev) => ({ ...prev, [e.target.name]: e.target.value }))}
+          onChange={(e) =>
+            setInfo((prev) => ({ ...prev, city: e.target.value }))
+          }
+          name="city"
+          placeholder="Екатеринбург"
+          label="Город"
+        />
+        <TextInput
+          onChange={(e) =>
+            setInfo((prev) => ({ ...prev, [e.target.name]: e.target.value }))
+          }
           name="profession"
           placeholder="Аналитик"
           label="Профессия"
         />
         <Textarea
-          onChange={(e) => setInfo((prev) => ({ ...prev, [e.target.name]: e.target.value }))}
+          onChange={(e) =>
+            setInfo((prev) => ({ ...prev, [e.target.name]: e.target.value }))
+          }
           name="descr"
           autosize
           multiple
@@ -104,7 +164,7 @@ export default function ApplicantEdit() {
         />
         <MultiSelect
           onChange={(e) => setInfo((prev) => ({ ...prev, skills: e }))}
-          data={data}
+          data={skills}
           label="Ваши навыки"
           placeholder="React vue"
         />
@@ -120,21 +180,26 @@ export default function ApplicantEdit() {
           <div className="d-flex">
             <h4>Опыт работы</h4>
             <Button
-              onClick={() => setInfo((prev) => ({ ...prev, workExp: prev.workExp.concat([{}]) }))}
+              onClick={() =>
+                setInfo((prev) => ({
+                  ...prev,
+                  experience: prev.experience.concat([{}]),
+                }))
+              }
               variant="subtle"
             >
               Добавить место
             </Button>
           </div>
-          {info.workExp.map((e, i) => (
+          {info.experience.map((e, i) => (
             <WorkExpItem
               key={i}
               exp={e}
               onChangeExp={(e) =>
                 setInfo((prev) => {
-                  const newWorkExp = [...prev.workExp];
+                  const newWorkExp = [...prev.experience];
                   newWorkExp[i] = e;
-                  return { ...prev, workExp: newWorkExp };
+                  return { ...prev, experience: newWorkExp };
                 })
               }
             />
@@ -160,7 +225,9 @@ export default function ApplicantEdit() {
       <div>
         <Checkbox
           value={info.isSearch}
-          onChange={(e) => setInfo((prev) => ({ ...prev, isSearch: e.target.checked }))}
+          onChange={(e) =>
+            setInfo((prev) => ({ ...prev, is_search: e.target.checked }))
+          }
           label="На данный момент я ищу работу"
           color="green"
           size="md"

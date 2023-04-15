@@ -10,9 +10,9 @@ export default function CreateVacancy() {
 
   return (
     <div>
-      <h3>Создать новую вакансию</h3>
+      <h3 className="text-center">Создать новую вакансию</h3>
       <Row className="mb-4">
-        <Col>
+        <Col md={6} className="mx-auto">
           <TextInput
             onChange={(e) => setInfo((prev) => ({ ...prev, [e.target.name]: e.target.value }))}
             name="name"

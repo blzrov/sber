@@ -10,7 +10,7 @@ export default function WorkExpItem({ exp, onChangeExp }) {
         <MonthPickerInput
           value={exp.start}
           onChange={(e) => {
-            onChangeExp({ ...exp, start: e });
+            onChangeExp({ ...exp, date_from: `${e.getFullYear()}-${e.getMonth() + 1}-${e.getDate()}` });
           }}
           label="Начало работы"
           placeholder="Укажите год и месяц"
@@ -20,7 +20,7 @@ export default function WorkExpItem({ exp, onChangeExp }) {
         <MonthPickerInput
           value={exp.end}
           onChange={(e) => {
-            onChangeExp({ ...exp, end: e });
+            onChangeExp({ ...exp, date_to: `${e.getFullYear()}-${e.getMonth() + 1}-${e.getDate()}` });
           }}
           label="Конец работы"
           placeholder="Укажите год и месяц"
@@ -30,7 +30,7 @@ export default function WorkExpItem({ exp, onChangeExp }) {
         <Textarea
           value={exp.descr}
           onChange={(e) => {
-            onChangeExp({ ...exp, descr: e.target.value });
+            onChangeExp({ ...exp, name: e.target.value });
           }}
           autosize
           multiple
