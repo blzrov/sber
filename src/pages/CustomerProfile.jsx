@@ -47,7 +47,7 @@ export default function CustomerProfile() {
                   asperiores eaque officia. Repudiandae cum velit iusto quas
                   quia, earum omnis nostrum tempora qui labore.
                 </Text>
-                <Button color="green">Откликнуться</Button>
+                <Button color="green" onClick={() => {navigate('/order-card/1')}}>Подробнее</Button>
               </Card>
               <Card shadow="sm" padding="lg" radius="md" withBorder>
                 <Title order={3}>Название</Title>
@@ -59,7 +59,7 @@ export default function CustomerProfile() {
                   asperiores eaque officia. Repudiandae cum velit iusto quas
                   quia, earum omnis nostrum tempora qui labore.
                 </Text>
-                <Button color="green">Откликнуться</Button>
+                <Button color="green" onClick={() => {navigate('/order-card/1')}}>Подробнее</Button>
               </Card>
             </SimpleGrid>
           </Tabs.Panel>

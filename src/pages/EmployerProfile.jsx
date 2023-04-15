@@ -1,8 +1,11 @@
 import { Row, Col } from "react-bootstrap";
 import { Image, Text, Card, SimpleGrid, Button, Title } from "@mantine/core";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function EmployerProfile() {
+  const navigate = useNavigate();
+
   return (
     <div>
       <Row className="mb-4">
@@ -14,8 +17,10 @@ export default function EmployerProfile() {
             Сбербанк
           </Title>
           <Text>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem distinctio ullam illo facilis reprehenderit
-            non quibusdam inventore debitis odit nostrum saepe, ex excepturi qui. Sunt dolor ratione ab dolores iure!
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem
+            distinctio ullam illo facilis reprehenderit non quibusdam inventore
+            debitis odit nostrum saepe, ex excepturi qui. Sunt dolor ratione ab
+            dolores iure!
           </Text>
         </Col>
       </Row>
@@ -31,11 +36,12 @@ export default function EmployerProfile() {
               З/п 10000р.
             </Title>
             <Text mb="md">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore necessitatibus ullam maxime commodi
-              impedit a asperiores eaque officia. Repudiandae cum velit iusto quas quia, earum omnis nostrum tempora qui
-              labore.
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore
+              necessitatibus ullam maxime commodi impedit a asperiores eaque
+              officia. Repudiandae cum velit iusto quas quia, earum omnis
+              nostrum tempora qui labore.
             </Text>
-            <Button color="green">Подробнее</Button>
+            <Button color="green" onClick={() => navigate('/vacancy-card/1')}>Подробнее</Button>
           </Card>
         </SimpleGrid>
       </Row>
