@@ -27,47 +27,47 @@ export default function Header() {
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="me-auto">
           {user?.role === roles.applicant && (
-            <Nav.Link>
-              <Link to="/employers">
+            <Link to="/employers">
+              <Nav.Link>
                 <LocationCityIcon /> Компании
-              </Link>
-            </Nav.Link>
+              </Nav.Link>
+            </Link>
           )}
           {user?.role === roles.applicant && (
-            <Nav.Link>
-              <Link to="/vacancys">
+            <Link to="/vacancys">
+              <Nav.Link>
                 <WorkTwoToneIcon /> Вакансии
-              </Link>
-            </Nav.Link>
+              </Nav.Link>
+            </Link>
           )}
           {user?.role === roles.employer && (
-            <Nav.Link>
-              <Link to="/applicants">
+            <Link to="/applicants">
+              <Nav.Link>
                 <EmojiPeopleTwoToneIcon /> Соискатели
-              </Link>
-            </Nav.Link>
+              </Nav.Link>
+            </Link>
           )}
           {(user?.role === roles.applicant || user?.role === roles.employer) && (
-            <Nav.Link>
-              <Link to="/courses">
+            <Link to="/courses">
+              <Nav.Link>
                 <QuizTwoToneIcon /> Тесты
-              </Link>
-            </Nav.Link>
+              </Nav.Link>
+            </Link>
           )}
 
           {user?.role === roles.applicant && (
-            <Nav.Link>
-              <Link to="/orders">
+            <Link to="/orders">
+              <Nav.Link>
                 <PriceChangeIcon /> Фриланс
-              </Link>
-            </Nav.Link>
+              </Nav.Link>
+            </Link>
           )}
           {user?.role === roles.applicant && (
-            <Nav.Link>
-              <Link to="/">
+            <Link to="/">
+              <Nav.Link>
                 <SupportAgentIcon /> Менторы
-              </Link>
-            </Nav.Link>
+              </Nav.Link>
+            </Link>
           )}
           {user && (
             <NavDropdown title="Остальное" id="collasible-nav-dropdown">
@@ -90,9 +90,9 @@ export default function Header() {
         </Nav>
         <Nav>
           {!user && (
-            <Nav.Link>
-              <Link to="/auth">Авторизация</Link>
-            </Nav.Link>
+            <Link to="/auth">
+              <Nav.Link>Авторизация</Nav.Link>
+            </Link>
           )}
           {user && (
             <Nav.Link>
