@@ -6,17 +6,16 @@ import { TextInput, Textarea, Checkbox, Button, Group, Text, rem, MultiSelect } 
 import { DateInput, MonthPickerInput, YearPickerInput } from "@mantine/dates";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import WorkExpItem from "../components/WorkExpItem";
 
 export default function ApplicantEdit() {
   const navigate = useNavigate();
-  const [info, setInfo] = useState({});
+  const [info, setInfo] = useState({ workExp: [{}] });
 
-  function handleChange(e) {
-    setInfo((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  }
   function handleSubmit() {
     console.log(info);
   }
+
   return (
     <div>
       <h3>Редактирование резюме</h3>
@@ -48,10 +47,29 @@ export default function ApplicantEdit() {
         </Col>
         <Col md={5}>
           <h4>Личная информация</h4>
-          <TextInput onChange={handleChange} name="name" placeholder="Иванов" label="Фамилия" />
-          <TextInput placeholder="Иван" label="Имя" />
-          <TextInput placeholder="Иванович" label="Отчество" />
-          <DateInput label="Дата рождения" placeholder="Введите дату рождения" onChange={(e) => console.log(e)} />
+          <TextInput
+            onChange={(e) => setInfo((prev) => ({ ...prev, [e.target.name]: e.target.value }))}
+            name="name"
+            placeholder="Иванов"
+            label="Фамилия"
+          />
+          <TextInput
+            onChange={(e) => setInfo((prev) => ({ ...prev, [e.target.name]: e.target.value }))}
+            name="surname"
+            placeholder="Иван"
+            label="Имя"
+          />
+          <TextInput
+            onChange={(e) => setInfo((prev) => ({ ...prev, [e.target.name]: e.target.value }))}
+            name="patronymic"
+            placeholder="Иванович"
+            label="Отчество"
+          />
+          <DateInput
+            onChange={(e) => setInfo((prev) => ({ ...prev, dateBirth: e }))}
+            label="Дата рождения"
+            placeholder="Введите дату рождения"
+          />
         </Col>
         <Col md={3}>
           <h4>Мой профиль</h4>
@@ -61,31 +79,45 @@ export default function ApplicantEdit() {
       </Row>
       <Row className="mb-2">
         <h4>Подробнее о вас</h4>
-        <Textarea autosize multiple placeholder="Расскажите про себя и как с вами можно связаться" label="О себе" />
-        <MultiSelect data={data} label="Ваши навыки" placeholder="React vue" />
+        <Textarea
+          onChange={(e) => setInfo((prev) => ({ ...prev, [e.target.name]: e.target.value }))}
+          name="descr"
+          autosize
+          multiple
+          placeholder="Расскажите про себя и как с вами можно связаться"
+          label="О себе"
+        />
+        <MultiSelect
+          onChange={(e) => setInfo((prev) => ({ ...prev, skills: e }))}
+          data={data}
+          label="Ваши навыки"
+          placeholder="React vue"
+        />
       </Row>
       <Row className="mb-2">
         <Col>
           <div className="d-flex">
             <h4>Опыт работы</h4>
-            <Button variant="subtle">Добавить место</Button>
+            <Button
+              onClick={() => setInfo((prev) => ({ ...prev, workExp: prev.workExp.concat([{}]) }))}
+              variant="subtle"
+            >
+              Добавить место
+            </Button>
           </div>
-          <Row>
-            <Col md={2}>
-              <MonthPickerInput label="Начало работы" placeholder="Укажите год и месяц" />
-            </Col>
-            <Col md={2}>
-              <MonthPickerInput label="Конец работы" placeholder="Укажите год и месяц" />
-            </Col>
-            <Col md={8}>
-              <Textarea
-                autosize
-                multiple
-                placeholder="Расскажите про свою роль на работе и какие задачи вы выполняли"
-                label="Описание"
-              />
-            </Col>
-          </Row>
+          {info.workExp.map((e, i) => (
+            <WorkExpItem
+              key={i}
+              exp={e}
+              onChangeExp={(e) =>
+                setInfo((prev) => {
+                  const newWorkExp = [...prev.workExp];
+                  newWorkExp[i] = e;
+                  return { ...prev, workExp: newWorkExp };
+                })
+              }
+            />
+          ))}
         </Col>
       </Row>
       <Row className="mb-2">
@@ -105,10 +137,18 @@ export default function ApplicantEdit() {
         </Col>
       </Row>
       <div>
-        <Checkbox label="На данный момент я ищу работу" color="green" size="md" />
+        <Checkbox
+          value={info.isSearch}
+          onChange={(e) => setInfo((prev) => ({ ...prev, isSearch: e.target.checked }))}
+          label="На данный момент я ищу работу"
+          color="green"
+          size="md"
+        />
         <Group position="right" mt="md">
           <Button onClick={() => navigate("/applicant/1")}>Отмена</Button>
-          <Button onClick={handleSubmit} color="green">Сохранить</Button>
+          <Button onClick={handleSubmit} color="green">
+            Сохранить
+          </Button>
         </Group>
       </div>
     </div>
@@ -124,12 +164,3 @@ const data = [
   { value: "next", label: "Next.js" },
   { value: "blitz", label: "Blitz.js" },
 ];
-
-{
-  /* <Checkbox mt="md" label="Я согласен на обработку моих данных" />
-        <Group position="right" mt="md">
-          <Button color="green" type="submit">
-            Сохранить
-          </Button>
-        </Group> */
-}
