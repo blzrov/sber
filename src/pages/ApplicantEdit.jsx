@@ -14,7 +14,6 @@ export default function ApplicantEdit() {
   const [img, setImg] = useState("");
 
   function handleImg(files) {
-    console.log(files);
     const file = files[0];
     const fileReader = new FileReader();
     fileReader.onload = () => {
@@ -22,7 +21,9 @@ export default function ApplicantEdit() {
       console.log(srcData);
       setImg(srcData);
     };
-    setImg(fileReader.readAsDataURL(file));
+    const base64 = fileReader.readAsDataURL(file);
+    setInfo((prev) => ({ ...prev, img: base64 }));
+    setImg(base64);
   }
 
   function handleSubmit() {
@@ -31,9 +32,7 @@ export default function ApplicantEdit() {
 
   return (
     <div>
-      <h3>Редактирование резюме</h3>
-      {/* <img src={img} /> */}
-      <img src={img} />
+      <h3>Редактирование профиля и резюме</h3>
       <Row className="mb-2">
         <Col md={3}>
           <h4>Фото</h4>
@@ -43,19 +42,14 @@ export default function ApplicantEdit() {
             onReject={(files) => console.log("rejected files", files)}
           >
             <Group position="center" spacing="xl" style={{ minHeight: rem(220), pointerEvents: "none" }}>
-              <Dropzone.Accept>
-                <IconUpload size="3.2rem" stroke={1.5} />
-              </Dropzone.Accept>
-              <Dropzone.Reject>
-                <IconX size="3.2rem" stroke={1.5} />
-              </Dropzone.Reject>
-              <Dropzone.Idle>
-                <IconPhoto size="3.2rem" stroke={1.5} />
-              </Dropzone.Idle>
+              {!img && <IconUpload size="3.2rem" stroke={1.5} />}
               <div>
-                <Text size="xl" inline>
-                  Загрузите фото
-                </Text>
+                {img && <img src={img} width={200} height={200} />}
+                {!img && (
+                  <Text size="xl" inline>
+                    Загрузите фото
+                  </Text>
+                )}
               </div>
             </Group>
           </Dropzone>
@@ -94,6 +88,12 @@ export default function ApplicantEdit() {
       </Row>
       <Row className="mb-2">
         <h4>Подробнее о вас</h4>
+        <TextInput
+          onChange={(e) => setInfo((prev) => ({ ...prev, [e.target.name]: e.target.value }))}
+          name="profession"
+          placeholder="Аналитик"
+          label="Профессия"
+        />
         <Textarea
           onChange={(e) => setInfo((prev) => ({ ...prev, [e.target.name]: e.target.value }))}
           name="descr"
@@ -107,6 +107,12 @@ export default function ApplicantEdit() {
           data={data}
           label="Ваши навыки"
           placeholder="React vue"
+        />
+        <MultiSelect
+          // onChange={(e) => setInfo((prev) => ({ ...prev, skills: e }))}
+          data={[{ value: "Удаленно", label: "Удаленно" }]}
+          label="Формат работы"
+          placeholder="В офисе"
         />
       </Row>
       <Row className="mb-2">

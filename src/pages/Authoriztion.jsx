@@ -53,9 +53,20 @@ export default function Authorization() {
           <>
             <h2 className="text-center">Вход</h2>
             <form
-              onSubmit={authForm.onSubmit((values) => {
-                console.log(values);
-                authForm.reset();
+              onSubmit={authForm.onSubmit(async (values) => {
+                const response = await fetch("http://100.73.198.48:8000/api/auth/login/", {
+                  headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                  },
+                  method: "POST",
+                  body: JSON.stringify(values),
+                });
+                const result = await response.json();
+                if (result.id) {
+                  localStorage.setItem("user", JSON.stringify(result));
+                  console.log(JSON.parse(localStorage.getItem("user")));
+                }
               })}
             >
               <TextInput
@@ -99,7 +110,6 @@ export default function Authorization() {
             <h2 className="text-center">Регистрация</h2>
             <form
               onSubmit={registrationForm.onSubmit(async (values) => {
-                console.log(values);
                 const response = await fetch("http://100.73.198.48:8000/api/auth/registration/", {
                   headers: {
                     "Content-Type": "application/json",
@@ -111,7 +121,8 @@ export default function Authorization() {
                 const result = await response.json();
                 console.log(result);
                 if (result.id) {
-                  localStorage.setItem(JSON.stringify(result));
+                  localStorage.setItem("user", JSON.stringify(result));
+                  console.log(localStorage);
                 }
               })}
             >

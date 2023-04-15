@@ -2,8 +2,12 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { Link } from "react-router-dom";
+import { getUser, roles } from "../helpers/user";
 
 export default function Header() {
+  const user = getUser();
+  console.log(user);
+
   return (
     <Navbar style={{ borderBottom: "1px solid green", marginBottom: "16px" }} collapseOnSelect expand="md">
       <Navbar.Brand>
@@ -12,18 +16,36 @@ export default function Header() {
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="me-auto">
-          <Nav.Link>
-            <Link to="/">Все вакансии</Link>
-          </Nav.Link>
-          <Nav.Link>
-            <Link to="/">Компании</Link>
-          </Nav.Link>
-          <Nav.Link>
-            <Link to="/courses">Тесты</Link>
-          </Nav.Link>
-          <Nav.Link>
-            <Link to="/applicants">Соискатели</Link>
-          </Nav.Link>
+          {user.role === roles.applicant && (
+            <Nav.Link>
+              <Link to="/">Компании</Link>
+            </Nav.Link>
+          )}
+          {user.role === roles.applicant && (
+            <Nav.Link>
+              <Link to="/">Все вакансии</Link>
+            </Nav.Link>
+          )}
+          {user.role === roles.applicant && (
+            <Nav.Link>
+              <Link to="/courses">Тесты</Link>
+            </Nav.Link>
+          )}
+          {false && (
+            <Nav.Link>
+              <Link to="/applicants">Соискатели</Link>
+            </Nav.Link>
+          )}
+          {user.role === roles.applicant && (
+            <Nav.Link>
+              <Link to="/">Фриланс</Link>
+            </Nav.Link>
+          )}
+          {user.role === roles.applicant && (
+            <Nav.Link>
+              <Link to="/">Менторы</Link>
+            </Nav.Link>
+          )}
           <NavDropdown title="Остальное" id="collasible-nav-dropdown">
             <NavDropdown.Item>
               <Link to="/employer/1">Работадатель</Link>
