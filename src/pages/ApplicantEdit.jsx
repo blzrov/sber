@@ -127,7 +127,7 @@ export default function ApplicantEdit() {
         </Col>
         <Col md={3}>
           <h4>Мой профиль</h4>
-          <TextInput value="blzrov" label="Логин" readOnly />
+          <TextInput value="blzrov" label="Почта" readOnly />
           <TextInput value="Соискатель" label="Роль" readOnly />
         </Col>
       </Row>

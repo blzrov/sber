@@ -1,7 +1,17 @@
 import { SimpleGrid, Card, Image, Title, Text, Button } from "@mantine/core";
+import { async } from "q";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function Vacancys() {
+  const [data, setData] = useState([]);
+
+  useEffect(async () => {
+    const response = await fetch("http://100.73.198.48:8000/api/vacancys/");
+    const data = await response.json();
+    setData(data);
+  }, []);
+
   return (
     <div>
       <h3>Вакансии</h3>
