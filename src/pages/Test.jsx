@@ -132,7 +132,6 @@ export default function Test() {
                       if (
                         !answers.map((v) => v.index).includes(currentQuestion) || answers.find((v) => v.index === currentQuestion)?.value != currentAnswer
                       ) {
-                        console.log('abc');
                         setAnswers([
                           ...answers.filter((v) => v.index !== currentQuestion),
                           { index: currentQuestion, value: currentAnswer },

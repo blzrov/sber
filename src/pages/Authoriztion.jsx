@@ -67,7 +67,6 @@ export default function Authorization() {
                 const result = await response.json();
                 if (result.id) {
                   localStorage.setItem("user", JSON.stringify(result));
-                  console.log(JSON.parse(localStorage.getItem("user")));
                   navigate("/");
                 }
               })}
@@ -122,10 +121,8 @@ export default function Authorization() {
                   body: JSON.stringify(values),
                 });
                 const result = await response.json();
-                console.log(result);
                 if (result.id) {
                   localStorage.setItem("user", JSON.stringify(result));
-                  console.log(localStorage);
                   navigate("/");
                 }
               })}
