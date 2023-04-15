@@ -11,6 +11,7 @@ import Authorization from "./pages/Authoriztion";
 import { useEffect } from "react";
 import EmployerProfile from "./pages/EmployerProfile";
 import Courses from "./pages/Courses";
+import CustomerProfile from "./pages/CustomerProfile";
 
 export default function App() {
   const navigate = useNavigate()
@@ -32,6 +33,7 @@ export default function App() {
           <Route path="/applicant/edit" element={<ApplicantEdit />} />
           <Route path="/employer/:id" element={<EmployerProfile/>}/>
           <Route path="/courses" element={<Courses/>}/>
+          <Route path="/customer/:id" element={<CustomerProfile/>}/>
         </Routes>
       </div>
     </Container>
