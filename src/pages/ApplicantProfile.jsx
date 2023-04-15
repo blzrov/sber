@@ -7,7 +7,9 @@ export default function ApplicantProfile() {
   const navigate = useNavigate();
   return (
     <div>
-      <Button onClick={() => navigate("/applicant/edit")}>Редактировать профиль</Button>
+      <Button onClick={() => navigate("/applicant/edit")}>
+        Редактировать профиль
+      </Button>
       <Row>
         <Col md={3}>Картинка</Col>
         <Col md={5}>

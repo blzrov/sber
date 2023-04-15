@@ -1,3 +1,7 @@
+import ApplicantHome from "../components/ApplicantHome";
+
 export default function Home() {
-  return <div>Home</div>;
+  return <div>
+    <ApplicantHome/>
+  </div>;
 }

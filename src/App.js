@@ -13,6 +13,7 @@ import EmployerProfile from "./pages/EmployerProfile";
 import Courses from "./pages/Courses";
 import CustomerProfile from "./pages/CustomerProfile";
 import Header from "./components/Header";
+import MentorProfile from "./pages/MentorProfile";
 
 export default function App() {
   const navigate = useNavigate()
@@ -36,6 +37,7 @@ export default function App() {
           <Route path="/employer/:id" element={<EmployerProfile/>}/>
           <Route path="/courses" element={<Courses/>}/>
           <Route path="/customer/:id" element={<CustomerProfile/>}/>
+          <Route path="/mentor/:id" element={<MentorProfile/>}/>
         </Routes>
       </div>
     </Container>
