@@ -9,6 +9,7 @@ import ApplicantEdit from "./pages/ApplicantEdit";
 import Container from "react-bootstrap/Container";
 import Authorization from "./pages/Authoriztion";
 import { useEffect } from "react";
+import EmployerProfile from "./pages/EmployerProfile";
 
 export default function App() {
   const navigate = useNavigate()
@@ -28,6 +29,7 @@ export default function App() {
           <Route path="/auth" element={<Authorization/>}/>
           <Route path="/applicant/:id" element={<ApplicantProfile />} />
           <Route path="/applicant/edit" element={<ApplicantEdit />} />
+          <Route path="/employer/:id" element={<EmployerProfile/>}/>
         </Routes>
       </div>
     </Container>
