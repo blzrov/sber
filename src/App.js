@@ -7,11 +7,13 @@ import Error from "./pages/Error";
 import ApplicantProfile from "./pages/ApplicantProfile";
 import ApplicantEdit from "./pages/ApplicantEdit";
 import Container from "react-bootstrap/Container";
+import Header from "./components/Header";
 
 export default function App() {
   return (
     <Container className="App">
       <div className="App">
+        <Header />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/second" element={<Second />} />
