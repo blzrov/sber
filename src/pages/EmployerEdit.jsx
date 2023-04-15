@@ -1,12 +1,18 @@
 import { TextInput, Group, rem, Text, Button } from "@mantine/core";
 import { Dropzone } from "@mantine/dropzone";
 import { IconUpload } from "@tabler/icons-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
 import { getUser } from "../helpers/user";
 
 export default function EmployerEdit() {
   const [info, setInfo] = useState({});
+
+  useEffect(async () => {
+    const response = await fetch(`http://100.73.198.48:8000/api/user/${getUser().id}`);
+    const data = await response.json();
+    setInfo(data);
+  }, []);
 
   function handleImg(files) {
     const file = files[0];
@@ -27,11 +33,12 @@ export default function EmployerEdit() {
       method: "PATCH",
       body: JSON.stringify({ ...info, id: getUser().id }),
     });
+    
   }
 
   return (
     <div>
-      <Row>
+      <Row>      
         <Col>
           <h4>Фото</h4>
           <Dropzone
@@ -55,6 +62,7 @@ export default function EmployerEdit() {
         <Col>
           <h4>О компании</h4>
           <TextInput
+            value={info.name}
             onChange={(e) => {
               setInfo((prev) => ({ ...prev, [e.target.name]: e.target.value }));
             }}
@@ -63,6 +71,7 @@ export default function EmployerEdit() {
             label="Название компании"
           />
           <TextInput
+            value={info.city}
             onChange={(e) => {
               setInfo((prev) => ({ ...prev, [e.target.name]: e.target.value }));
             }}
@@ -71,6 +80,7 @@ export default function EmployerEdit() {
             label="Местоположение"
           />
           <TextInput
+            value={info.descr}
             onChange={(e) => {
               setInfo((prev) => ({ ...prev, [e.target.name]: e.target.value }));
             }}

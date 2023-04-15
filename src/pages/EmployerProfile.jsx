@@ -8,6 +8,7 @@ import { getUser } from "../helpers/user";
 export default function EmployerProfile() {
   const { id } = useParams();
   const [data, setData] = useState({});
+
   useEffect(async () => {
     const response = await fetch(`http://100.73.198.48:8000/api/user/${id}`);
     const data = await response.json();
@@ -16,6 +17,7 @@ export default function EmployerProfile() {
     data.vacancies = data2;
     setData(data);
   }, []);
+
   return (
     <div>
       <Row className="mb-4">
