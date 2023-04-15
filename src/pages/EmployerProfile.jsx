@@ -1,5 +1,6 @@
 import { Row, Col } from "react-bootstrap";
 import { Image, Text, Card, SimpleGrid, Button, Title } from "@mantine/core";
+import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 export default function EmployerProfile() {
@@ -25,7 +26,9 @@ export default function EmployerProfile() {
       </Row>
       <Row>
         <h2>Вакансии</h2>
-        <Button color="green">Добавить вакансию</Button>
+        <Link to="/vacancy/new">
+          <Button color="green">Добавить вакансию</Button>
+        </Link>
         <SimpleGrid>
           <Card shadow="sm" padding="lg" radius="md" withBorder>
             <Title order={3}>Название</Title>

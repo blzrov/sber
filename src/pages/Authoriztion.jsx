@@ -8,11 +8,11 @@ export default function Authorization() {
   const [authState, setAuthState] = useState("login");
   const authForm = useForm({
     initialValues: {
-      login: "",
+      email: "",
       password: "",
     },
     validate: {
-      login: (value) => (value.length > 0 ? null : "Введите логин"),
+      email: (value) => (value.length > 0 ? null : "Введите логин"),
       password: (value) => {
         if (value.length === 0) {
           return "Введите пароль";
@@ -27,18 +27,18 @@ export default function Authorization() {
 
   const registrationForm = useForm({
     initialValues: {
-      login: "",
+      email: "",
       password: "",
       role: "",
     },
     validate: {
-      login: (value) => (value.length > 0 ? null : "Введите логин"),
+      email: (value) => (value.length > 0 ? null : "Введите логин"),
       password: (value) => {
         if (value.length === 0) {
           return "Введите пароль";
         }
-        if (value.length < 6) {
-          return "Минимальная длина 6 символов";
+        if (value.length < 4) {
+          return "Минимальная длина 4 символов";
         }
         return null;
       },
@@ -51,7 +51,7 @@ export default function Authorization() {
       <Col md={3} className="mx-auto">
         {authState === "login" && (
           <>
-            <h2 className='text-center'>Вход</h2>
+            <h2 className="text-center">Вход</h2>
             <form
               onSubmit={authForm.onSubmit((values) => {
                 console.log(values);
@@ -61,7 +61,7 @@ export default function Authorization() {
               <TextInput
                 label="Логин"
                 placeholder="Ваш логин"
-                {...authForm.getInputProps("login")}
+                {...authForm.getInputProps("email")}
                 withAsterisk
                 size="lg"
                 radius="md"
@@ -96,17 +96,26 @@ export default function Authorization() {
         )}
         {authState === "registration" && (
           <>
-            <h2 className='text-center'>Регистрация</h2>
+            <h2 className="text-center">Регистрация</h2>
             <form
-              onSubmit={registrationForm.onSubmit((values) => {
+              onSubmit={registrationForm.onSubmit(async (values) => {
                 console.log(values);
-                registrationForm.reset();
+                const response = await fetch("http://100.73.198.48:8000/api/auth/registration/", {
+                  headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                  },
+                  method: "POST",
+                  body: JSON.stringify(values),
+                });
+                const result = await response.json();
+                console.log(result);
               })}
             >
               <TextInput
                 label="Логин"
                 placeholder="Ваш логин"
-                {...registrationForm.getInputProps("login")}
+                {...registrationForm.getInputProps("email")}
                 withAsterisk
                 size="lg"
                 radius="md"
@@ -142,11 +151,7 @@ export default function Authorization() {
                 </Button>
                 <p>
                   У вас уже есть аккаунт?{" "}
-                  <span
-                    onClick={() => setAuthState("login")}
-                    className="text-primary"
-                    style={{ cursor: "pointer" }}
-                  >
+                  <span onClick={() => setAuthState("login")} className="text-primary" style={{ cursor: "pointer" }}>
                     Войдите.
                   </span>
                 </p>
