@@ -22,6 +22,7 @@ import Vacancys from "./pages/Vacancys";
 import OrderCard from "./pages/OrderCard";
 import VacancyCard from "./pages/VacancyCard";
 import Orders from "./pages/Orders"
+import CustomerEdit from "./pages/CustomerEdit";
 
 export default function App() {
   const navigate = useNavigate();
@@ -47,6 +48,7 @@ export default function App() {
           <Route path="/courses" element={<Courses />} />
           <Route path="/courses/:id" element={<Test />} />
           <Route path="/customer/:id" element={<CustomerProfile />} />
+          <Route path="/customer/edit" element={<CustomerEdit />} />
           <Route path="/vacancy/new" element={<CreateVacancy />} />
           <Route path="/vacancys" element={<Vacancys />} />
           <Route path="/create-order" element={<CreateOrder />} />

@@ -11,19 +11,15 @@ import WorkExpItem from "../components/WorkExpItem";
 export default function ApplicantEdit() {
   const navigate = useNavigate();
   const [info, setInfo] = useState({ workExp: [{}] });
-  const [img, setImg] = useState("");
 
   function handleImg(files) {
     const file = files[0];
     const fileReader = new FileReader();
     fileReader.onload = () => {
       const srcData = fileReader.result;
-      console.log(srcData);
-      setImg(srcData);
+      setInfo((prev) => ({ ...prev, img: srcData }));
     };
-    const base64 = fileReader.readAsDataURL(file);
-    setInfo((prev) => ({ ...prev, img: base64 }));
-    setImg(base64);
+    fileReader.readAsDataURL(file);
   }
 
   function handleSubmit() {
@@ -42,10 +38,10 @@ export default function ApplicantEdit() {
             onReject={(files) => console.log("rejected files", files)}
           >
             <Group position="center" spacing="xl" style={{ minHeight: rem(220), pointerEvents: "none" }}>
-              {!img && <IconUpload size="3.2rem" stroke={1.5} />}
+              {!info.img && <IconUpload size="3.2rem" stroke={1.5} />}
               <div>
-                {img && <img src={img} width={200} height={200} />}
-                {!img && (
+                {info.img && <img src={info.img} width={200} height={200} />}
+                {!info.img && (
                   <Text size="xl" inline>
                     Загрузите фото
                   </Text>

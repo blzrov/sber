@@ -3,8 +3,10 @@ import { useForm } from "@mantine/form";
 import { Button, Select } from "@mantine/core";
 import { Row, Col } from "react-bootstrap";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 
 export default function Authorization() {
+  const navigate = useNavigate();
   const [authState, setAuthState] = useState("login");
   const authForm = useForm({
     initialValues: {
@@ -66,6 +68,7 @@ export default function Authorization() {
                 if (result.id) {
                   localStorage.setItem("user", JSON.stringify(result));
                   console.log(JSON.parse(localStorage.getItem("user")));
+                  navigate("/");
                 }
               })}
             >
@@ -123,6 +126,7 @@ export default function Authorization() {
                 if (result.id) {
                   localStorage.setItem("user", JSON.stringify(result));
                   console.log(localStorage);
+                  navigate("/");
                 }
               })}
             >

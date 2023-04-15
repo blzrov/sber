@@ -70,7 +70,8 @@ export default function Header() {
           )}
           {user && (
             <Nav.Link>
-              <Link to="/applicant/1">Профиль</Link>
+              {user.role === roles.applicant && <Link to="/applicant/1">Профиль</Link>}
+              {user.role === roles.customer && <Link to="/customer/1">Профиль</Link>}
             </Nav.Link>
           )}
         </Nav>
