@@ -33,6 +33,9 @@ export default function Header() {
           <Nav.Link>
             <Link to="/applicant/1">Реестр соискателей</Link>
           </Nav.Link>
+          <Nav.Link>
+            <Link to="/mentor/1">Ментор</Link>
+          </Nav.Link>
           <NavDropdown title="Остальное" id="collasible-nav-dropdown">
             <NavDropdown.Item>Action</NavDropdown.Item>
             <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
