@@ -38,7 +38,7 @@ export default function Header() {
           )}
           {user?.role === roles.applicant && (
             <Nav.Link>
-              <Link to="/">Фриланс</Link>
+              <Link to="/orders">Фриланс</Link>
             </Nav.Link>
           )}
           {user?.role === roles.applicant && (

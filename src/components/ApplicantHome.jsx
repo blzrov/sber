@@ -1,5 +1,7 @@
 import { Row, Col } from "react-bootstrap";
-import { Card, MantineProvider } from "@mantine/core";
+import { Card } from "@mantine/core";
+import { RingProgress } from "@mantine/core";
+import AcUnitIcon from '@mui/icons-material/AcUnit';
 
 export default function ApplicantHome() {
   return (
@@ -7,7 +9,26 @@ export default function ApplicantHome() {
       <Row className="my-5">
         <Col>
           <Card shadow="sm" padding="lg" radius="md" withBorder>
-            <h3>Мои достижения</h3>
+            <Row>
+              <Col>
+                <h3>Мои достижения</h3>
+              </Col>
+              <Col>
+                <RingProgress
+                  size={140}
+                  thickness={20}
+                  roundCaps
+                  sections={[
+                    { value: 40, color: "cyan" },
+                    { value: 15, color: "orange" },
+                    { value: 15, color: "grape" },
+                  ]}
+                />
+              </Col>
+              <Col>
+                <h3>Мои достижения</h3>
+              </Col>
+            </Row>
           </Card>
         </Col>
       </Row>
@@ -22,7 +43,7 @@ export default function ApplicantHome() {
             style={{
               background: "linear-gradient(70deg , rgba(245, 241, 134, 0.6), rgba(252, 208, 0, 0.6))",
               height: "200px",
-              cursor: 'pointer'
+              cursor: "pointer",
             }}
           >
             <h3>12 работодателей ищут сотрудников!</h3>
@@ -38,7 +59,7 @@ export default function ApplicantHome() {
             style={{
               background: "linear-gradient(to left ,rgba(157, 251, 200, 0.6), rgba(252, 208, 0, 0.6))",
               height: "200px",
-              cursor: 'pointer'
+              cursor: "pointer",
             }}
           >
             <h3>Фриланс!</h3>
@@ -54,10 +75,10 @@ export default function ApplicantHome() {
             style={{
               background: "linear-gradient(70deg ,rgba(157, 251, 200, 0.6), rgba(152, 222, 91, 0.6))",
               height: "200px",
-              cursor: 'pointer'
+              cursor: "pointer",
             }}
           >
-            <h3>Проверь свои навыки!</h3>
+            <h3>Проверь свои скиллы!</h3>
           </Card>
         </Col>
       </Row>
