@@ -46,7 +46,6 @@ export default function ApplicantEdit() {
 
   async function handleSubmit() {
     const data = { ...info, id: getUser().id };
-    console.log(data)
     const response = await fetch("http://100.73.198.48:8000/api/user/", {
       headers: {
         "Content-Type": "application/json",
