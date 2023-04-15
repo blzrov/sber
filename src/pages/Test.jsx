@@ -8,7 +8,7 @@ import { useState } from "react";
 import { test } from "../test";
 
 export default function Test() {
-  const [isStarted, setIsStarted] = useState(false);
+  const [stage, setStage] = useState("not started");
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [successedQuestions, setSuccessedQuestions] = useState([]);
@@ -17,7 +17,7 @@ export default function Test() {
   const [answers, setAnswers] = useState([]);
   return (
     <div>
-      {!isStarted ? (
+      {stage === "not started" && (
         <div>
           <SimpleGrid cols={1}>
             <Card shadow="sm" padding="lg" radius="md" withBorder>
@@ -28,13 +28,14 @@ export default function Test() {
                 Cum debitis, ipsa ea distinctio doloremque voluptate veniam, id
                 dolores enim ex blanditiis. Praesentium.
               </p>
-              <Button color="green" onClick={() => setIsStarted(true)}>
+              <Button color="green" onClick={() => setStage("in progress")}>
                 Начать тест
               </Button>
             </Card>
           </SimpleGrid>
         </div>
-      ) : (
+      )}
+      {stage === "in progress" && (
         <div>
           <NavigationProgress color="green" initialProgress={10} />
           <Row>
@@ -53,8 +54,12 @@ export default function Test() {
                       }
                       onClick={() => {
                         setCurrentQuestion(i);
-                        setTouched(false)
-                        setCurrentAnswer(answers.map((v) => v.index).includes(i) ? answers.find((v) => v.index === i).value : '')
+                        setTouched(false);
+                        setCurrentAnswer(
+                          answers.map((v) => v.index).includes(i)
+                            ? answers.find((v) => v.index === i).value
+                            : ""
+                        );
                       }}
                       key={i}
                     >
@@ -99,7 +104,6 @@ export default function Test() {
                           <Radio
                             value={v}
                             label={v}
-                            checked={true}
                             onClick={(e) => {
                               setCurrentAnswer(e.target.value);
                               setTouched(true);
@@ -125,17 +129,28 @@ export default function Test() {
                   onClick={() => {
                     setTouched(true);
                     if (currentAnswer) {
-                      setAnswers([
-                        ...answers,
-                        {index: currentQuestion, value: currentAnswer}
-                      ])
-                      setCurrentAnswer(answers.map((v) => v.index).includes(currentQuestion + 1) ? answers.find((v) => v.index === currentQuestion + 1).value : '');
+                      if (
+                        !answers.map((v) => v.index).includes(currentQuestion) || answers.find((v) => v.index === currentQuestion)?.value != currentAnswer
+                      ) {
+                        console.log('abc');
+                        setAnswers([
+                          ...answers.filter((v) => v.index !== currentQuestion),
+                          { index: currentQuestion, value: currentAnswer },
+                        ]);
+                      }
+                      setCurrentAnswer(
+                        answers
+                          .map((v) => v.index)
+                          .includes(currentQuestion + 1)
+                          ? answers.find((v) => v.index === currentQuestion + 1)
+                              .value
+                          : ""
+                      );
                       setTouched(false);
                       if (currentQuestion < test.length - 1) {
                         setCurrentQuestion(currentQuestion + 1);
-                      }
-                      else{
-                        console.log(answers);
+                      } else {
+                        setStage("completed");
                       }
                     }
                   }}
@@ -149,6 +164,23 @@ export default function Test() {
                 {!currentAnswer && touched && (
                   <div className="text-danger">Вы не ответили на вопрос</div>
                 )}
+              </Card>
+            </Col>
+          </Row>
+        </div>
+      )}
+      {stage === "completed" && (
+        <div>
+          <Row>
+            <Col>
+              <Card shadow="sm" padding="lg" radius="md" withBorder>
+                <h2 className="text-center">Результаты</h2>
+                <p>Вы набрали: {answers.reduce((acc, curr, idx) => {
+                  if (curr.value === test[curr.index].correctAnswer){
+                    acc += 1
+                  }
+                  return acc
+                }, 0)} из {test.length} баллов</p>
               </Card>
             </Col>
           </Row>
