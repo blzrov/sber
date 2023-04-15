@@ -14,6 +14,7 @@ import Courses from "./pages/Courses";
 import CustomerProfile from "./pages/CustomerProfile";
 import Header from "./components/Header";
 import MentorProfile from "./pages/MentorProfile";
+import Test from "./pages/Test";
 
 export default function App() {
   const navigate = useNavigate()
@@ -36,6 +37,7 @@ export default function App() {
           <Route path="/applicant/edit" element={<ApplicantEdit />} />
           <Route path="/employer/:id" element={<EmployerProfile/>}/>
           <Route path="/courses" element={<Courses/>}/>
+          <Route path="/courses/:id" element={<Test/>}/>
           <Route path="/customer/:id" element={<CustomerProfile/>}/>
           <Route path="/mentor/:id" element={<MentorProfile/>}/>
         </Routes>
