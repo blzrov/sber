@@ -10,6 +10,7 @@ import Container from "react-bootstrap/Container";
 import Authorization from "./pages/Authoriztion";
 import { useEffect } from "react";
 import EmployerProfile from "./pages/EmployerProfile";
+import Courses from "./pages/Courses";
 
 export default function App() {
   const navigate = useNavigate()
@@ -30,6 +31,7 @@ export default function App() {
           <Route path="/applicant/:id" element={<ApplicantProfile />} />
           <Route path="/applicant/edit" element={<ApplicantEdit />} />
           <Route path="/employer/:id" element={<EmployerProfile/>}/>
+          <Route path="/courses" element={<Courses/>}/>
         </Routes>
       </div>
     </Container>
