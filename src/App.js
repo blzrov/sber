@@ -12,18 +12,20 @@ import { useEffect } from "react";
 import EmployerProfile from "./pages/EmployerProfile";
 import Courses from "./pages/Courses";
 import CustomerProfile from "./pages/CustomerProfile";
+import Header from "./components/Header";
 
 export default function App() {
   const navigate = useNavigate()
   useEffect(() => {
-    if(!localStorage.getItem('user')){
-      navigate('/auth')
-    }
+    // if(!localStorage.getItem('user')){
+    //   navigate('/auth')
+    // }
   }, [])
 
   return (
     <Container className="App">
       <div className="App">
+        <Header />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/second" element={<Second />} />
