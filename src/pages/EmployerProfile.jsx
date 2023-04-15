@@ -13,9 +13,16 @@ export default function EmployerProfile() {
           <Image />
         </Col>
         <Col md={7}>
-          <Title order={1} className="mb-3">
-            Сбербанк
-          </Title>
+          <Row>
+            <Col>
+              <Title order={1} className="mb-3">
+                Сбербанк
+              </Title>
+            </Col>
+            <Col md={4} className="d-flex align-items-center">
+              <Button color="green">Редактировать профиль</Button>
+            </Col>
+          </Row>
           <Text>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem
             distinctio ullam illo facilis reprehenderit non quibusdam inventore
@@ -41,7 +48,9 @@ export default function EmployerProfile() {
               officia. Repudiandae cum velit iusto quas quia, earum omnis
               nostrum tempora qui labore.
             </Text>
-            <Button color="green" onClick={() => navigate('/vacancy-card/1')}>Подробнее</Button>
+            <Button color="green" onClick={() => navigate("/vacancy-card/1")}>
+              Подробнее
+            </Button>
           </Card>
         </SimpleGrid>
       </Row>

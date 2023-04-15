@@ -55,7 +55,6 @@ export default function ApplicantEdit() {
       method: "PATCH",
       body: JSON.stringify(data),
     });
-    console.log(response)
   }
 
   return (

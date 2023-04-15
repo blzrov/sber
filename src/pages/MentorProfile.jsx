@@ -5,7 +5,7 @@ export default function MentorProfile() {
     <div>
       <Row>
         <Col>
-          <div>ФИО</div>
+          <h3>ФИО</h3>
           <div>Компетенции</div>
           <div>О себе</div>
         </Col>

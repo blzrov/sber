@@ -1,18 +1,28 @@
 import { Row, Col } from "react-bootstrap";
 import { useState } from "react";
-import { TextInput, Textarea, Checkbox, Button, Group, Text, rem, MultiSelect } from "@mantine/core";
+import { TextInput, Textarea, Button } from "@mantine/core";
+import { getUser } from "../helpers/user";
 
 export default function CreateVacancy() {
   const [info, setInfo] = useState({});
-  function handleSubmit() {
-    console.log(info);
+  async function handleSubmit() {
+    const data = {...info, id: getUser().id}
+    const response = await fetch("http://100.73.198.48:8000/api/vacancy/", {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      method: "POST",
+      body: JSON.stringify(data),
+    });
+    console.log(response)
   }
 
   return (
     <div>
       <h3 className="text-center">Создать новую вакансию</h3>
       <Row className="mb-4">
-        <Col md={6} className="mx-auto">
+        <Col md={5} className="mx-auto">
           <TextInput
             onChange={(e) => setInfo((prev) => ({ ...prev, [e.target.name]: e.target.value }))}
             name="name"
@@ -33,7 +43,7 @@ export default function CreateVacancy() {
             placeholder="Напишите подробнее о вакансии"
             label="Описание"
           />
-          <Button color="green" onClick={handleSubmit}>
+          <Button color="green" className="mt-2" onClick={handleSubmit}>
             Опубликовать
           </Button>
         </Col>
