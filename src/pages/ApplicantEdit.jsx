@@ -2,13 +2,14 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Dropzone } from "@mantine/dropzone";
 import { IconUpload, IconPhoto, IconX } from "@tabler/icons-react";
-import { TextInput, Textarea, Checkbox, Button, Group, Text, rem } from "@mantine/core";
+import { TextInput, Textarea, Checkbox, Button, Group, Text, rem, MultiSelect } from "@mantine/core";
+import { DateInput, MonthPickerInput, YearPickerInput } from "@mantine/dates";
 
 export default function ApplicantEdit() {
   return (
     <div>
       <h3>Редактирование резюме</h3>
-      <Row>
+      <Row className="mb-2">
         <Col md={3}>
           <h4>Фото</h4>
           <Dropzone
@@ -39,13 +40,7 @@ export default function ApplicantEdit() {
           <TextInput placeholder="Иванов" label="Фамилия" />
           <TextInput placeholder="Иван" label="Имя" />
           <TextInput placeholder="Иванович" label="Отчество" />
-          <Textarea autosize multiple placeholder="Расскажите про себя и как с вами можно связаться" label="О себе" />
-          <Checkbox mt="md" label="Я согласен на обработку моих данных" />
-          <Group position="right" mt="md">
-            <Button color="green" type="submit">
-              Отправить
-            </Button>
-          </Group>
+          <DateInput label="Дата рождения" placeholder="Введите дату рождения" onChange={(e) => console.log(e)} />
         </Col>
         <Col md={3}>
           <h4>Мой профиль</h4>
@@ -53,6 +48,76 @@ export default function ApplicantEdit() {
           <TextInput value="Соискатель" label="Роль" readOnly />
         </Col>
       </Row>
+      <Row className="mb-2">
+        <h4>Подробнее о вас</h4>
+        <Textarea autosize multiple placeholder="Расскажите про себя и как с вами можно связаться" label="О себе" />
+        <MultiSelect data={data} label="Ваши навыки" placeholder="React vue" />
+      </Row>
+      <Row className="mb-2">
+        <Col>
+          <div className="d-flex">
+            <h4>Опыт работы</h4>
+            <Button variant="subtle">Добавить место</Button>
+          </div>
+          <Row>
+            <Col md={2}>
+              <MonthPickerInput label="Начало работы" placeholder="Укажите год и месяц" />
+            </Col>
+            <Col md={2}>
+              <MonthPickerInput label="Конец работы" placeholder="Укажите год и месяц" />
+            </Col>
+            <Col md={8}>
+              <Textarea
+                autosize
+                multiple
+                placeholder="Расскажите про свою роль на работе и какие задачи вы выполняли"
+                label="Описание"
+              />
+            </Col>
+          </Row>
+        </Col>
+      </Row>
+      <Row className="mb-2">
+        <Col>
+          <h4>Образование</h4>
+          <Row>
+            <Col md={2}>
+              <YearPickerInput label="Начало" placeholder="Укажите год" />
+            </Col>
+            <Col md={2}>
+              <YearPickerInput label="Конец" placeholder="Укажите год" />
+            </Col>
+            <Col md={8}>
+              <TextInput placeholder="МГУ" label="Место обучения" />
+            </Col>
+          </Row>
+        </Col>
+      </Row>
+      <div>
+        <Checkbox label="На данный момент я ищу работу" color="green" size="md" />
+        <Group position="right" mt="md">
+          <Button color="green">Сохранить</Button>
+        </Group>
+      </div>
     </div>
   );
+}
+
+const data = [
+  { value: "react", label: "React" },
+  { value: "ng", label: "Angular" },
+  { value: "svelte", label: "Svelte" },
+  { value: "vue", label: "Vue" },
+  { value: "riot", label: "Riot" },
+  { value: "next", label: "Next.js" },
+  { value: "blitz", label: "Blitz.js" },
+];
+
+{
+  /* <Checkbox mt="md" label="Я согласен на обработку моих данных" />
+        <Group position="right" mt="md">
+          <Button color="green" type="submit">
+            Сохранить
+          </Button>
+        </Group> */
 }
