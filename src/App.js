@@ -17,6 +17,8 @@ import Test from "./pages/Test";
 import CreateVacancy from "./pages/CreateVacancy";
 import Applicants from "./pages/Applicants";
 import CreateOrder from "./pages/CreateOrder";
+import Employers from "./pages/Employers"
+import Vacancys from "./pages/Vacancys"
 
 export default function App() {
   const navigate = useNavigate();
@@ -38,10 +40,12 @@ export default function App() {
           <Route path="/applicant/:id" element={<ApplicantProfile />} />
           <Route path="/applicant/edit" element={<ApplicantEdit />} />
           <Route path="/employer/:id" element={<EmployerProfile />} />
+          <Route path="/employers" element={<Employers />} />
           <Route path="/courses" element={<Courses />} />
           <Route path="/courses/:id" element={<Test />} />
           <Route path="/customer/:id" element={<CustomerProfile />} />
           <Route path="/vacancy/new" element={<CreateVacancy />} />
+          <Route path="/vacancys" element={<Vacancys />} />
           <Route path="/create-order" element={<CreateOrder/>}/>
           <Route path="/mentor/:id" element={<MentorProfile />} />
         </Routes>

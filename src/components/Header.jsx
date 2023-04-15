@@ -16,17 +16,17 @@ export default function Header() {
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="me-auto">
-          {user.role === roles.applicant && (
+          {user?.role === roles.applicant && (
             <Nav.Link>
-              <Link to="/">Компании</Link>
+              <Link to="/employers">Компании</Link>
             </Nav.Link>
           )}
-          {user.role === roles.applicant && (
+          {user?.role === roles.applicant && (
             <Nav.Link>
-              <Link to="/">Все вакансии</Link>
+              <Link to="/vacancys">Вакансии</Link>
             </Nav.Link>
           )}
-          {user.role === roles.applicant && (
+          {user?.role === roles.applicant && (
             <Nav.Link>
               <Link to="/courses">Тесты</Link>
             </Nav.Link>
@@ -36,37 +36,43 @@ export default function Header() {
               <Link to="/applicants">Соискатели</Link>
             </Nav.Link>
           )}
-          {user.role === roles.applicant && (
+          {user?.role === roles.applicant && (
             <Nav.Link>
               <Link to="/">Фриланс</Link>
             </Nav.Link>
           )}
-          {user.role === roles.applicant && (
+          {user?.role === roles.applicant && (
             <Nav.Link>
               <Link to="/">Менторы</Link>
             </Nav.Link>
           )}
-          <NavDropdown title="Остальное" id="collasible-nav-dropdown">
-            <NavDropdown.Item>
-              <Link to="/employer/1">Работадатель</Link>
-            </NavDropdown.Item>
-            <NavDropdown.Item>
-              <Link to="/mentor/1">Ментор</Link>
-            </NavDropdown.Item>
-            <NavDropdown.Item>
-              <Link to="/customer/1">Заказчик</Link>
-            </NavDropdown.Item>
-            <NavDropdown.Divider />
-            <NavDropdown.Item>Separated link</NavDropdown.Item>
-          </NavDropdown>
+          {user && (
+            <NavDropdown title="Остальное" id="collasible-nav-dropdown">
+              <NavDropdown.Item>
+                <Link to="/employer/1">Работадатель</Link>
+              </NavDropdown.Item>
+              <NavDropdown.Item>
+                <Link to="/mentor/1">Ментор</Link>
+              </NavDropdown.Item>
+              <NavDropdown.Item>
+                <Link to="/customer/1">Заказчик</Link>
+              </NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item>Separated link</NavDropdown.Item>
+            </NavDropdown>
+          )}
         </Nav>
         <Nav>
-          <Nav.Link>
-            <Link to="/auth">Авторизация</Link>
-          </Nav.Link>
-          <Nav.Link>
-            <Link to="/applicant/1">Профиль</Link>
-          </Nav.Link>
+          {!user && (
+            <Nav.Link>
+              <Link to="/auth">Авторизация</Link>
+            </Nav.Link>
+          )}
+          {user && (
+            <Nav.Link>
+              <Link to="/applicant/1">Профиль</Link>
+            </Nav.Link>
+          )}
         </Nav>
       </Navbar.Collapse>
     </Navbar>
