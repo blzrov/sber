@@ -4,6 +4,8 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import Home from "./pages/Home";
 import Second from "./pages/Second";
 import Error from "./pages/Error";
+import ApplicantProfile from "./pages/ApplicantProfile";
+import ApplicantEdit from "./pages/ApplicantEdit";
 import Container from "react-bootstrap/Container";
 import Authorization from "./pages/Authoriztion";
 import { useEffect } from "react";
@@ -17,13 +19,15 @@ export default function App() {
   }, [])
 
   return (
-    <Container fluid className="App">
+    <Container className="App">
       <div className="App">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/second" element={<Second />} />
           <Route path="*" element={<Error />} />
           <Route path="/auth" element={<Authorization/>}/>
+          <Route path="/applicant/:id" element={<ApplicantProfile />} />
+          <Route path="/applicant/edit" element={<ApplicantEdit />} />
         </Routes>
       </div>
     </Container>
