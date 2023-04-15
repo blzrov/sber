@@ -72,7 +72,7 @@ export default function ApplicantEdit() {
               spacing="xl"
               style={{ minHeight: rem(220), pointerEvents: "none" }}
             >
-              {!img && <IconUpload size="3.2rem" stroke={1.5} />}
+              {!info.img && <IconUpload size="3.2rem" stroke={1.5} />}
               <div>
                 {info.img && <img src={info.img} width={200} height={200} />}
                 {!info.img && (

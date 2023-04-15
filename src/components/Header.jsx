@@ -47,14 +47,13 @@ export default function Header() {
               </Link>
             </Nav.Link>
           )}
-          {user?.role === roles.applicant ||
-            (user?.role === roles.employer && (
-              <Nav.Link>
-                <Link to="/courses">
-                  <QuizTwoToneIcon /> Тесты
-                </Link>
-              </Nav.Link>
-            ))}
+          {(user?.role === roles.applicant || user?.role === roles.employer) && (
+            <Nav.Link>
+              <Link to="/courses">
+                <QuizTwoToneIcon /> Тесты
+              </Link>
+            </Nav.Link>
+          )}
 
           {user?.role === roles.applicant && (
             <Nav.Link>
@@ -75,6 +74,9 @@ export default function Header() {
               <NavDropdown.Item>
                 <Link to="/employer/1">Работадатель</Link>
               </NavDropdown.Item>
+              <Link to="/employer/1">
+                <NavDropdown.Item>Работадатель</NavDropdown.Item>
+              </Link>
               <NavDropdown.Item>
                 <Link to="/mentor/1">Ментор</Link>
               </NavDropdown.Item>
@@ -95,7 +97,7 @@ export default function Header() {
           {user && (
             <Nav.Link>
               {user.role === roles.applicant && (
-                <Link to="/applicant/1">
+                <Link to={`/applicant/${user.id}`}>
                   <AccountBoxIcon /> Профиль
                 </Link>
               )}
@@ -105,7 +107,7 @@ export default function Header() {
                 </Link>
               )}
               {user?.role === roles.employer && (
-                <Link to="/employer/1">
+                <Link to={`/employer/${user.id}`}>
                   <ManageAccountsTwoToneIcon /> Управление
                 </Link>
               )}

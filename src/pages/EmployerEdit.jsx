@@ -3,10 +3,10 @@ import { Dropzone } from "@mantine/dropzone";
 import { IconUpload } from "@tabler/icons-react";
 import { useState } from "react";
 import { Row, Col } from "react-bootstrap";
+import { getUser } from "../helpers/user";
 
 export default function EmployerEdit() {
   const [info, setInfo] = useState({});
-  const [img, setImg] = useState("");
 
   function handleImg(files) {
     const file = files[0];
@@ -18,8 +18,15 @@ export default function EmployerEdit() {
     fileReader.readAsDataURL(file);
   }
 
-  function handleSubmit(){
-    console.log(info)
+  async function handleSubmit() {
+    const response = await fetch("http://100.73.198.48:8000/api/user/", {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      method: "PATCH",
+      body: JSON.stringify({ ...info, id: getUser().id }),
+    });
   }
 
   return (
@@ -32,11 +39,7 @@ export default function EmployerEdit() {
             onDrop={(files) => handleImg(files)}
             onReject={(files) => console.log("rejected files", files)}
           >
-            <Group
-              position="center"
-              spacing="xl"
-              style={{ minHeight: rem(220), pointerEvents: "none" }}
-            >
+            <Group position="center" spacing="xl" style={{ minHeight: rem(220), pointerEvents: "none" }}>
               {!info.img && <IconUpload size="3.2rem" stroke={1.5} />}
               <div>
                 {info.img && <img src={info.img} width={200} height={200} />}
@@ -50,7 +53,7 @@ export default function EmployerEdit() {
           </Dropzone>
         </Col>
         <Col>
-        <h4>О компании</h4>
+          <h4>О компании</h4>
           <TextInput
             onChange={(e) => {
               setInfo((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -63,11 +66,21 @@ export default function EmployerEdit() {
             onChange={(e) => {
               setInfo((prev) => ({ ...prev, [e.target.name]: e.target.value }));
             }}
+            name="city"
+            placeholder="Москва"
+            label="Местоположение"
+          />
+          <TextInput
+            onChange={(e) => {
+              setInfo((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+            }}
             name="descr"
             placeholder="О компании"
             label="Описание"
           />
-          <Button color="green" className="mt-3" onClick={handleSubmit}>Сохранить</Button>
+          <Button color="green" className="mt-3" onClick={handleSubmit}>
+            Сохранить
+          </Button>
         </Col>
       </Row>
     </div>
