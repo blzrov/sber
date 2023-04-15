@@ -1,15 +1,25 @@
 import { Row, Col } from "react-bootstrap";
 import { Text, Title, Tabs, SimpleGrid, Card, Button } from "@mantine/core";
+import { useNavigate } from "react-router-dom";
 
 export default function CustomerProfile() {
+  const navigate = useNavigate()
+
   return (
     <div>
       <Row className="mb-4">
-        <Col>
+        <Col md={10}>
           <Title order={1} className="mb-1">
             Сбербанк
           </Title>
           <Text mb="xs">ФИО Заказчика</Text>
+        </Col>
+        <Col md={2} className="d-flex align-items-center">
+          <Button onClick={() => navigate('/create-order')} color="green">Создать заказ</Button>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
           <Text>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem
             distinctio ullam illo facilis reprehenderit non quibusdam inventore

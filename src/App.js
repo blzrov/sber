@@ -16,6 +16,7 @@ import MentorProfile from "./pages/MentorProfile";
 import Test from "./pages/Test";
 import CreateVacancy from "./pages/CreateVacancy";
 import Applicants from "./pages/Applicants";
+import CreateOrder from "./pages/CreateOrder";
 
 export default function App() {
   const navigate = useNavigate();
@@ -41,6 +42,7 @@ export default function App() {
           <Route path="/courses/:id" element={<Test />} />
           <Route path="/customer/:id" element={<CustomerProfile />} />
           <Route path="/vacancy/new" element={<CreateVacancy />} />
+          <Route path="/create-order" element={<CreateOrder/>}/>
           <Route path="/mentor/:id" element={<MentorProfile />} />
         </Routes>
       </div>
