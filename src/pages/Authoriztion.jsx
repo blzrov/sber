@@ -14,7 +14,7 @@ export default function Authorization() {
       password: "",
     },
     validate: {
-      email: (value) => (value.length > 0 ? null : "Введите логин"),
+      email: (value) => (value.length > 0 ? null : "Введите почту"),
       password: (value) => {
         if (value.length === 0) {
           return "Введите пароль";
@@ -34,7 +34,7 @@ export default function Authorization() {
       role: "",
     },
     validate: {
-      email: (value) => (value.length > 0 ? null : "Введите логин"),
+      email: (value) => (value.length > 0 ? null : "Введите почту"),
       password: (value) => {
         if (value.length === 0) {
           return "Введите пароль";
@@ -73,8 +73,8 @@ export default function Authorization() {
               })}
             >
               <TextInput
-                label="Логин"
-                placeholder="Ваш логин"
+                label="Почта"
+                placeholder="Ваша почта"
                 {...authForm.getInputProps("email")}
                 withAsterisk
                 size="lg"
@@ -131,8 +131,8 @@ export default function Authorization() {
               })}
             >
               <TextInput
-                label="Логин"
-                placeholder="Ваш логин"
+                label="Почта"
+                placeholder="Ваша почта"
                 {...registrationForm.getInputProps("email")}
                 withAsterisk
                 size="lg"
