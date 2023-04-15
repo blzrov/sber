@@ -9,7 +9,7 @@ export default function CustomerProfile() {
           <Title order={1} className="mb-1">
             Сбербанк
           </Title>
-          <Text mb='xs'>ФИО Заказчика</Text>
+          <Text mb="xs">ФИО Заказчика</Text>
           <Text>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem
             distinctio ullam illo facilis reprehenderit non quibusdam inventore
