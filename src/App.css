@@ -21,3 +21,8 @@
 .mantine-PasswordInput-input:focus-within {
   border-color: #2b8a3e !important;
 }
+
+a {
+  text-decoration: none !important;
+  
+}

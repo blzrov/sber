@@ -1,7 +1,10 @@
 import { Row, Col } from "react-bootstrap";
 import { Card } from "@mantine/core";
 import { RingProgress } from "@mantine/core";
-import AcUnitIcon from '@mui/icons-material/AcUnit';
+import WorkHistoryIcon from "@mui/icons-material/WorkHistory";
+import PublicTwoToneIcon from "@mui/icons-material/PublicTwoTone";
+import KeyboardDoubleArrowUpTwoToneIcon from "@mui/icons-material/KeyboardDoubleArrowUpTwoTone";
+import { Link } from "react-router-dom";
 
 export default function ApplicantHome() {
   return (
@@ -34,52 +37,61 @@ export default function ApplicantHome() {
       </Row>
       <Row>
         <Col>
-          <Card
-            shadow="sm"
-            className="d-flex flex-column-reverse align-items-center"
-            padding="lg"
-            radius="md"
-            withBorder
-            style={{
-              background: "linear-gradient(70deg , rgba(245, 241, 134, 0.6), rgba(252, 208, 0, 0.6))",
-              height: "200px",
-              cursor: "pointer",
-            }}
-          >
-            <h3>12 работодателей ищут сотрудников!</h3>
-          </Card>
+          <Link to="/employers">
+            <Card
+              shadow="sm"
+              className="d-flex flex-column-reverse align-items-center justify-content-center"
+              padding="lg"
+              radius="md"
+              withBorder
+              style={{
+                background: "linear-gradient(70deg , rgba(245, 241, 134, 0.6), rgba(252, 208, 0, 0.6))",
+                height: "200px",
+                cursor: "pointer",
+              }}
+            >
+              <h3 style={{ textAlign: "center" }}>12 работодателей ищут сотрудников!</h3>
+              <WorkHistoryIcon fontSize="large" />
+            </Card>
+          </Link>
         </Col>
         <Col>
-          <Card
-            shadow="sm"
-            className="d-flex flex-column-reverse align-items-center"
-            padding="lg"
-            radius="md"
-            withBorder
-            style={{
-              background: "linear-gradient(to left ,rgba(157, 251, 200, 0.6), rgba(252, 208, 0, 0.6))",
-              height: "200px",
-              cursor: "pointer",
-            }}
-          >
-            <h3>Фриланс!</h3>
-          </Card>
+          <Link to="/orders">
+            <Card
+              shadow="sm"
+              className="d-flex flex-column-reverse align-items-center justify-content-center"
+              padding="lg"
+              radius="md"
+              withBorder
+              style={{
+                background: "linear-gradient(to left ,rgba(157, 251, 200, 0.6), rgba(252, 208, 0, 0.6))",
+                height: "200px",
+                cursor: "pointer",
+              }}
+            >
+              <h3>Фриланс!</h3>
+              <PublicTwoToneIcon fontSize="large" />
+            </Card>
+          </Link>
         </Col>
         <Col>
-          <Card
-            shadow="sm"
-            className="d-flex flex-column-reverse align-items-center"
-            padding="lg"
-            radius="md"
-            withBorder
-            style={{
-              background: "linear-gradient(70deg ,rgba(157, 251, 200, 0.6), rgba(152, 222, 91, 0.6))",
-              height: "200px",
-              cursor: "pointer",
-            }}
-          >
-            <h3>Проверь свои скиллы!</h3>
-          </Card>
+          <Link to="/courses">
+            <Card
+              shadow="sm"
+              className="d-flex flex-column-reverse align-items-center justify-content-center"
+              padding="lg"
+              radius="md"
+              withBorder
+              style={{
+                background: "linear-gradient(70deg ,rgba(157, 251, 200, 0.6), rgba(152, 222, 91, 0.6))",
+                height: "200px",
+                cursor: "pointer",
+              }}
+            >
+              <h3>Проверь свои скиллы!</h3>
+              <KeyboardDoubleArrowUpTwoToneIcon fontSize="large" />
+            </Card>
+          </Link>
         </Col>
       </Row>
     </div>

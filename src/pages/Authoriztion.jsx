@@ -17,7 +17,7 @@ export default function Authorization() {
         if (value.length === 0) {
           return "Введите пароль";
         }
-        if (value.length < 6) {
+        if (value.length < 4) {
           return "Минимальная длина 6 символов";
         }
         return null;
