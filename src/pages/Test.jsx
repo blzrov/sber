@@ -6,6 +6,7 @@ import { Radio } from "@mantine/core";
 import { Progress } from "@mantine/core";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { getUser } from "../helpers/user";
 
 export default function Test() {
   const [stage, setStage] = useState("not started");
@@ -30,8 +31,19 @@ export default function Test() {
       }
       return acc
     }, 0)
-    console.log(results / tasks.length * 100)
-  }
+    const response = await fetch("http://100.73.198.48:8000/api/test/user", {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      method: "POST",
+      body: JSON.stringify({
+        user: getUser().id,
+        test: id,
+        result: results
+      })
+    })
+  };
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [successedQuestions, setSuccessedQuestions] = useState([]);

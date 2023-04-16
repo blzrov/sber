@@ -1,7 +1,19 @@
 import { Row, Col } from "react-bootstrap";
 import { Card, Badge } from "@mantine/core";
+import { useEffect, useState } from "react";
+import EmployerTests from "./EmployerTest";
 
 export default function EmployerHome() {
+  const [applicants, setApplicants] = useState([]);
+  const [tests, setTests] = useState([])
+  useEffect(async () => {
+    const response = await fetch(
+      "http://100.73.198.48:8000/api/users/applicants"
+    );
+    const data = await response.json();
+    setApplicants(data);
+  }, []);
+
   return (
     <div>
       <Row>
@@ -23,30 +35,9 @@ export default function EmployerHome() {
         <Col md={6}>
           <Card shadow="sm" padding="lg" radius="md" withBorder>
             <h2 className="text-center mb-4">Возможно вам подойдут</h2>
-            <Card shadow="sm" padding="lg" radius="md" withBorder>
-              <h4 className="text-center mb-3">Белозеров Денис Батькович</h4>
-              <Row>
-                <Col md={2}>
-                  <h5>Навыки:</h5>
-                </Col>
-                <Col md={10} className="d-flex" style={{gap: 10}}>
-                  {['HTML', 'CSS', 'React'].map((v) => <Badge size="lg">{v}</Badge>)}
-                </Col>
-              </Row>
-              <Row>
-                <h5>Пройденные тесты:</h5>
-                <Col>
-                    <Row>
-                        <Col md={4}>Frontend-разработчик:</Col>
-                        <Col md={8}>86%</Col>
-                    </Row>
-                    <Row>
-                        <Col md={4}>Backend-разработчик:</Col>
-                        <Col md={8}>100%</Col>
-                    </Row>
-                </Col>
-              </Row>
-            </Card>
+            {applicants.map((v) => (
+                <EmployerTests applicant={v} id={v.id}/>
+            ))}
           </Card>
         </Col>
       </Row>
