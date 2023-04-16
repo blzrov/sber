@@ -21,10 +21,10 @@ export default function EmployerProfile() {
   return (
     <div>
       <Row className="mb-4">
-        <Col md={5}>
-          <Image />
+        <Col md={3}>
+          <img height={150} src={data.img} />
         </Col>
-        <Col md={7}>
+        <Col md={9}>
           <div className="d-flex justify-content-between">
             <h1 className="mb-3">{data.name}</h1>
             {getUser()?.id == id && (
@@ -39,11 +39,13 @@ export default function EmployerProfile() {
       <Row>
         <div className="d-flex align-items-center">
           <h2 className="pe-3">Вакансии</h2>
-          <Link to="/vacancy/new">
-            <Button variant="light" compact>
-              Добавить вакансию
-            </Button>
-          </Link>
+          {getUser()?.id == id && (
+            <Link to="/vacancy/new">
+              <Button variant="light" compact>
+                Добавить вакансию
+              </Button>
+            </Link>
+          )}
         </div>
         <SimpleGrid>
           {data?.vacancies?.map((e, i) => (

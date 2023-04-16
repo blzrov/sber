@@ -21,14 +21,15 @@ export default function EmployerHome() {
           <Card shadow="sm" padding="lg" radius="md" withBorder>
             <h2 className="text-center mb-4">Новые отклики</h2>
             <Card
+              style={{ cursor: "pointer" }}
               shadow="sm"
               padding="lg"
               radius="md"
               withBorder
               className="d-flex justify-content-between align-items-center"
             >
-              <h4>React-разработчик</h4>
-              <h4>12</h4>
+              <h4 style={{ color: "green", fontWeight: "600" }}>React-разработчик</h4>
+              <h4 style={{ color: "green", fontWeight: "600" }}>+12</h4>
             </Card>
           </Card>
         </Col>

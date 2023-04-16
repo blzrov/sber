@@ -7,26 +7,21 @@ export default function Employers() {
     <div>
       <h3>Компании</h3>
       <SimpleGrid cols={1} spacing="xl">
-        <Card
-          shadow="sm"
-          padding="lg"
-          radius="md"
-          withBorder
-          className="d-flex"
-        >
+        <Card shadow="sm" padding="lg" radius="md" withBorder className="d-flex">
           <Row>
             <Col md={4}>
-              <Image height={200} />
+              <img height={200} src={""} />
             </Col>
             <Col md={8}>
-              <Title order={2} className="mb-2">Frontend-разработка</Title>
+              <Title order={2} className="mb-2">
+                Frontend-разработка
+              </Title>
               <Text>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                Maiores amet deleniti ullam atque dignissimos! Quasi, sapiente
-                beatae tempora cum quia ipsam unde incidunt soluta atque aperiam
-                est voluptatum eos porro?
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Maiores amet deleniti ullam atque dignissimos!
+                Quasi, sapiente beatae tempora cum quia ipsam unde incidunt soluta atque aperiam est voluptatum eos
+                porro?
               </Text>
-              <Text color="gray" fz='xl' fw={600} className="mb-2">
+              <Text color="gray" fz="xl" fw={600} className="mb-2">
                 100 вакансий
               </Text>
               <Link to="/employer/1">

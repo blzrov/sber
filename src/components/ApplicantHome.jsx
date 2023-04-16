@@ -5,6 +5,7 @@ import WorkHistoryIcon from "@mui/icons-material/WorkHistory";
 import PublicTwoToneIcon from "@mui/icons-material/PublicTwoTone";
 import KeyboardDoubleArrowUpTwoToneIcon from "@mui/icons-material/KeyboardDoubleArrowUpTwoTone";
 import { Link } from "react-router-dom";
+import { Title, Text, Button } from "@mantine/core";
 
 export default function ApplicantHome() {
   return (
@@ -13,10 +14,10 @@ export default function ApplicantHome() {
         <Col>
           <Card shadow="sm" padding="lg" radius="md" withBorder>
             <Row>
-              <Col>
-                <h3>Мои достижения</h3>
+              <Col style={{ textAlign: "center" }}>
+                <h3>Мой рейтинг</h3>
               </Col>
-              <Col>
+              <Col className="d-flex justify-content-center">
                 <RingProgress
                   size={140}
                   thickness={20}
@@ -28,8 +29,9 @@ export default function ApplicantHome() {
                   ]}
                 />
               </Col>
-              <Col>
-                <h3>Мои достижения</h3>
+              <Col style={{ textAlign: "center" }}>
+                <h3>Выполнено заказов:</h3>
+                <h3>55</h3>
               </Col>
             </Row>
           </Card>
@@ -94,6 +96,16 @@ export default function ApplicantHome() {
           </Link>
         </Col>
       </Row>
+      <Card shadow="sm" padding="lg" radius="md" withBorder className="my-3 d-flex flex-column">
+        <Title order={2}>Название</Title>
+        <Text mb="xs">100000 р/мес</Text>
+        <Text mb="sm">Описание</Text>
+        <Link to="/vacancy-card/1">
+          <Button color="green" size="md">
+            Перейти
+          </Button>
+        </Link>
+      </Card>
     </div>
   );
 }

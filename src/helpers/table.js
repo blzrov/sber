@@ -75,5 +75,6 @@ export const options = {
   filtering: true,
   sorting: true,
   paging: false,
-  toolbar: false,
+  toolbar: true,
+  columnsButton: true,
 };

@@ -6,24 +6,27 @@ import { useState, useEffect } from "react";
 
 export default function Applicants() {
   const [data, setData] = useState([]);
+
   useEffect(async () => {
-    const response = await fetch("http://100.73.198.48:8000/api/applicants/");
+    const response = await fetch("http://100.73.198.48:8000/api/users/applicants");
     const data = await response.json();
+    console.log(data);
     setData(data);
   }, []);
 
   return (
     <div>
-      <h3>Все соискатели</h3>
-      <MaterialTable options={options} icons={icons} localization={localization} columns={columns} data={data} />
+      <MaterialTable
+        title={"Все соискатели"}
+        options={options}
+        icons={icons}
+        localization={localization}
+        columns={columns}
+        data={data}
+      />
     </div>
   );
 }
-
-const data = [
-  { fullName: "Mohammad", surname: "Faisal", birthYear: 1995 },
-  { fullName: "Nayeem Raihan ", surname: "Shuvo", birthYear: 1994 },
-];
 
 const columns = [
   {
@@ -31,15 +34,16 @@ const columns = [
     field: "fullName",
     render: (rowData) => {
       return (
-        <Link to="/applicant/1">
-          <div style={{ color: "blue", cursor: "pointer" }}>{rowData.fullName}</div>
+        <Link to={`/applicant/${rowData.id}`}>
+          <div style={{ color: "blue", cursor: "pointer" }}>
+            {rowData.surname + " " + rowData.name + " " + rowData.patronymic}
+          </div>
         </Link>
       );
     },
   },
-  { title: "Профессия", field: "surname" },
-  { title: "Возраст", field: "birthYear" },
-  { title: "Навыки", field: "name" },
-  { title: "Образование", field: "surname" },
-  { title: "Рейтинг", field: "birthYear" },
+  { title: "Профессия", field: "profession" },
+  { title: "Возраст", field: "birth_day" },
+  { title: "Город", field: "city" },
+  { title: "Рейтинг", field: "rate" },
 ];
