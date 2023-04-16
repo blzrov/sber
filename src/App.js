@@ -26,6 +26,7 @@ import CustomerEdit from "./pages/CustomerEdit";
 import EmployerEdit from "./pages/EmployerEdit";
 import { ToastProvider } from "react-toast-notifications";
 import MentorEdit from "./pages/MentorEdit";
+import Mentors from "./pages/Mentors";
 
 export default function App() {
   const navigate = useNavigate();
@@ -59,6 +60,7 @@ export default function App() {
             <Route path="/create-order" element={<CreateOrder />} />
             <Route path="/mentor/:id" element={<MentorProfile />} />
             <Route path="/mentor/edit" element={<MentorEdit/>}/>
+            <Route path="/mentors" element={<Mentors/>}/>
             <Route path="/order-card/:id" element={<OrderCard />} />
             <Route path="/orders" element={<Orders />} />
             <Route path="/vacancy-card/:id" element={<VacancyCard />} />

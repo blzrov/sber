@@ -4,11 +4,34 @@ import { SimpleGrid, Button, Card, TextInput } from "@mantine/core";
 import { nprogress, NavigationProgress } from "@mantine/nprogress";
 import { Radio } from "@mantine/core";
 import { Progress } from "@mantine/core";
-import { useState } from "react";
-import { test } from "../test";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router";
 
 export default function Test() {
   const [stage, setStage] = useState("not started");
+  const {id} = useParams()
+  const [name, setName] = useState('')
+  const [tasks, setTasks] = useState([])
+  const [description, setDescription] = useState('')
+
+  useEffect(async() => {
+    const response = await fetch(`http://100.73.198.48:8000/api/test/${id}`)
+    const data = await response.json()
+    console.log(data)
+    setName(data.name)
+    setTasks(data.tasks)
+    setDescription(data.descr)
+  }, [])
+
+  async function sendResults() {
+    const results = answers.reduce((acc, curr, idx) => {
+      if (curr.value === tasks[curr.index].correct_answer){
+        acc += 1
+      }
+      return acc
+    }, 0)
+    console.log(results / tasks.length * 100)
+  }
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [successedQuestions, setSuccessedQuestions] = useState([]);
@@ -21,12 +44,9 @@ export default function Test() {
         <div>
           <SimpleGrid cols={1}>
             <Card shadow="sm" padding="lg" radius="md" withBorder>
-              <h3 className="text-center">Название теста</h3>
+              <h3 className="text-center">{name}</h3>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam
-                consequatur, voluptates laborum cumque dicta fugiat provident.
-                Cum debitis, ipsa ea distinctio doloremque voluptate veniam, id
-                dolores enim ex blanditiis. Praesentium.
+                {description}
               </p>
               <Button color="green" onClick={() => setStage("in progress")}>
                 Начать тест
@@ -41,9 +61,9 @@ export default function Test() {
           <Row>
             <Col md={4}>
               <Card shadow="sm" padding="lg" radius="md" withBorder>
-                <h3>Название теста</h3>
+                <h3>{name}</h3>
                 <SimpleGrid cols={5}>
-                  {test.map((v, i) => (
+                  {tasks.map((v, i) => (
                     <div
                       style={
                         i === currentQuestion
@@ -84,16 +104,13 @@ export default function Test() {
             <Col md={8}>
               <Card shadow="sm" padding="lg" radius="md" withBorder>
                 <h4>Вопрос {currentQuestion + 1}</h4>
-                {test[currentQuestion].image && (
-                  <img src={test[currentQuestion].image}></img>
-                )}
-                <div>{test[currentQuestion].question}</div>
+                <div>{tasks[currentQuestion].question}</div>
 
-                {test[currentQuestion].answerType === "variants" ? (
+                {tasks[currentQuestion].answers.length >= 0 ? (
                   <Radio.Group name="" label="">
                     <h6>Выберите верный вариант ответа:</h6>
                     <SimpleGrid cols={1}>
-                      {test[currentQuestion].answers.map((v, i) => (
+                      {tasks[currentQuestion].answers.map((v, i) => (
                         <Card
                           shadow="sm"
                           padding="lg"
@@ -146,15 +163,16 @@ export default function Test() {
                           : ""
                       );
                       setTouched(false);
-                      if (currentQuestion < test.length - 1) {
+                      if (currentQuestion < tasks.length - 1) {
                         setCurrentQuestion(currentQuestion + 1);
                       } else {
                         setStage("completed");
+                        sendResults()
                       }
                     }
                   }}
                 >
-                  {currentQuestion === test.length - 1 ? (
+                  {currentQuestion === tasks.length - 1 ? (
                     <span>Завершить тест</span>
                   ) : (
                     <span>Подтвердить</span>
@@ -175,11 +193,11 @@ export default function Test() {
               <Card shadow="sm" padding="lg" radius="md" withBorder>
                 <h2 className="text-center">Результаты</h2>
                 <p>Вы набрали: {answers.reduce((acc, curr, idx) => {
-                  if (curr.value === test[curr.index].correctAnswer){
+                  if (curr.value === tasks[curr.index].correct_answer){
                     acc += 1
                   }
                   return acc
-                }, 0)} из {test.length} баллов</p>
+                }, 0)} из {tasks.length} баллов</p>
               </Card>
             </Col>
           </Row>

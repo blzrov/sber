@@ -64,7 +64,7 @@ export default function Header() {
           )}
           {user?.role === roles.applicant && (
             <Nav.Link>
-              <Link to="/">
+              <Link to="/mentors">
                 <SupportAgentIcon /> Менторы
               </Link>
             </Nav.Link>

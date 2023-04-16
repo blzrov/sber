@@ -31,10 +31,14 @@ export default function Courses() {
             <Title order={2} mb="sm">
               {v.name}
             </Title>
+            <Text className="mb-2">
+              {v.descr}
+            </Text>
             <Button
               onClick={() => navigate(`/courses/${v.id}`)}
               color="green"
               size="md"
+              className="mt-auto"
             >
               Перейти
             </Button>
