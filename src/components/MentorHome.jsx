@@ -18,7 +18,7 @@ export default function MentorHome() {
       <Row>
         <Col>
           <Card shadow="sm" padding="lg" radius="md" withBorder>
-            <h2 className="text-center mb-4">Соискатели</h2>
+            <h2 className="text-center mb-4">Ищут ментора</h2>
             {applicants.map((v) => (
                 <MentorTest applicant={v} id={v.id}/>
             ))}
