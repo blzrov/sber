@@ -39,11 +39,13 @@ export default function EmployerProfile() {
       <Row>
         <div className="d-flex align-items-center">
           <h2 className="pe-3">Вакансии</h2>
-          <Link to="/vacancy/new">
-            <Button variant="light" compact>
-              Добавить вакансию
-            </Button>
-          </Link>
+          {getUser()?.id == id && (
+            <Link to="/vacancy/new">
+              <Button variant="light" compact>
+                Добавить вакансию
+              </Button>
+            </Link>
+          )}
         </div>
         <SimpleGrid>
           {data?.vacancies?.map((e, i) => (

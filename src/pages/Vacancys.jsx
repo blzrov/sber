@@ -4,23 +4,26 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Row } from "react-bootstrap";
 import { Col } from "react-bootstrap";
+import { Skeleton } from "@mantine/core";
 
 export default function Vacancys() {
   const [data, setData] = useState([]);
   const [skills, setSkills] = useState([]);
   const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(async () => {
     const response = await fetch("http://100.73.198.48:8000/api/vacancies/");
     const data = await response.json();
     setData(data);
-    const response2 = await fetch("http://100.73.198.48:8000/api/skills/");
-    const data2 = await response2.json();
-    setSkills(
-      data2.map((v) => {
-        return { value: v.name, label: v.name };
-      })
-    );
+    setLoading(false);
+    // const response2 = await fetch("http://100.73.198.48:8000/api/skills/");
+    // const data2 = await response2.json();
+    // setSkills(
+    //   data2.map((v) => {
+    //     return { value: v.name, label: v.name };
+    //   })
+    // );
   }, []);
 
   return (
@@ -41,25 +44,36 @@ export default function Vacancys() {
         </Col>
         <Col md={8}>
           <Card shadow="sm" padding="lg" radius="md" withBorder>
-            <SimpleGrid cols={2} spacing="xl">
-              {data
-                ?.filter((e) => e.name?.includes(search) || e.descr?.includes(search))
-                .map((v) => (
-                  <Card shadow="sm" padding="lg" radius="md" withBorder className="d-flex flex-column">
-                    <Card.Section mb="xs">
-                      <Image height={200} />
-                    </Card.Section>
-                    <Title order={2}>{v.name}</Title>
-                    <Text mb="xs">{v.salary} р/мес</Text>
-                    <Text mb="sm">{v.descr}</Text>
-                    <Link to={`/vacancy-card/${v.id}`}>
-                      <Button color="green" size="md">
-                        Перейти
-                      </Button>
-                    </Link>
-                  </Card>
-                ))}
-            </SimpleGrid>
+            {loading ? (
+              <SimpleGrid cols={2} spacing="xl">
+                <Skeleton height={200} mb="xl" />
+                <Skeleton height={200} mb="xl" />
+                <Skeleton height={200} mb="xl" />
+                <Skeleton height={200} mb="xl" />
+                <Skeleton height={200} mb="xl" />
+                <Skeleton height={200} mb="xl" />
+              </SimpleGrid>
+            ) : (
+              <SimpleGrid cols={2} spacing="xl">
+                {data
+                  ?.filter((e) => e.name?.includes(search) || e.descr?.includes(search))
+                  .map((v) => (
+                    <Card shadow="sm" padding="lg" radius="md" withBorder className="d-flex flex-column">
+                      <Card.Section mb="xs">
+                        <img height={200} src={v.img} />
+                      </Card.Section>
+                      <Title order={2}>{v.name}</Title>
+                      <Text mb="xs">{v.salary} р/мес</Text>
+                      <Text mb="sm">{v.descr}</Text>
+                      <Link to={`/vacancy-card/${v.id}`}>
+                        <Button color="green" size="md">
+                          Перейти
+                        </Button>
+                      </Link>
+                    </Card>
+                  ))}
+              </SimpleGrid>
+            )}
           </Card>
         </Col>
       </Row>

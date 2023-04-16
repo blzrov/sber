@@ -1,10 +1,25 @@
-import { SimpleGrid, Card, Image, Title, Text, Button } from "@mantine/core";
+import { SimpleGrid, Card, Image, Title, Text, Button, TextInput } from "@mantine/core";
 import { Link } from "react-router-dom";
+import { Row, Col } from "react-bootstrap";
+import { useState } from "react";
 
 export default function Orders() {
+  const [search, setSearch] = useState("");
   return (
     <div>
-      <h3>Заказы</h3>
+      <Row className="mb-4">
+        <Col md={4}>
+          <h3>Найти заказ</h3>
+        </Col>
+        <Col md={8} style={{ textAlign: "center" }}>
+          <TextInput
+            onChange={(e) => setSearch(e.target.value.toLowerCase())}
+            placeholder="Поиск..."
+            radius="xl"
+            size="md"
+          />
+        </Col>
+      </Row>
       <SimpleGrid cols={3} spacing="xl">
         <Card shadow="sm" padding="lg" radius="md" withBorder className="d-flex flex-column">
           <Card.Section mb="xs">
