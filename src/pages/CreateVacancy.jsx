@@ -5,8 +5,10 @@ import { getUser } from "../helpers/user";
 import { Dropzone } from "@mantine/dropzone";
 import { IconUpload, IconPhoto, IconX } from "@tabler/icons-react";
 import { Checkbox, Group, Text, rem, MultiSelect } from "@mantine/core";
+import { useToasts } from "react-toast-notifications";
 
 export default function CreateVacancy() {
+  const { addToast } = useToasts();
   const [info, setInfo] = useState({});
 
   function handleImg(files) {
@@ -29,7 +31,10 @@ export default function CreateVacancy() {
       method: "POST",
       body: JSON.stringify(data),
     });
-    console.log(response);
+    addToast("Сохранено", {
+      appearance: "success",
+      autoDismiss: true,
+    });
   }
 
   return (
