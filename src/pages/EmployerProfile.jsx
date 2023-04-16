@@ -21,10 +21,10 @@ export default function EmployerProfile() {
   return (
     <div>
       <Row className="mb-4">
-        <Col md={5}>
-          <Image />
+        <Col md={3}>
+          <img height={150} src={data.img} />
         </Col>
-        <Col md={7}>
+        <Col md={9}>
           <div className="d-flex justify-content-between">
             <h1 className="mb-3">{data.name}</h1>
             {getUser()?.id == id && (

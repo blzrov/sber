@@ -14,10 +14,10 @@ export default function ApplicantHome() {
         <Col>
           <Card shadow="sm" padding="lg" radius="md" withBorder>
             <Row>
-              <Col>
-                <h3>Мои достижения</h3>
+              <Col style={{ textAlign: "center" }}>
+                <h3>Мой рейтинг</h3>
               </Col>
-              <Col>
+              <Col className="d-flex justify-content-center">
                 <RingProgress
                   size={140}
                   thickness={20}
@@ -29,8 +29,9 @@ export default function ApplicantHome() {
                   ]}
                 />
               </Col>
-              <Col>
-                <h3>Мои достижения</h3>
+              <Col style={{ textAlign: "center" }}>
+                <h3>Выполнено заказов:</h3>
+                <h3>55</h3>
               </Col>
             </Row>
           </Card>

@@ -69,7 +69,7 @@ export default function Header() {
               </Link>
             </Nav.Link>
           )}
-          {user && (
+          {/* {user && (
             <NavDropdown title="Остальное" id="collasible-nav-dropdown">
               <NavDropdown.Item>
                 <Link to="/employer/1">Работадатель</Link>
@@ -86,7 +86,7 @@ export default function Header() {
               <NavDropdown.Divider />
               <NavDropdown.Item>Separated link</NavDropdown.Item>
             </NavDropdown>
-          )}
+          )} */}
         </Nav>
         <Nav>
           {!user && (
