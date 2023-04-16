@@ -15,6 +15,8 @@ export default function Test() {
   const [tasks, setTasks] = useState([])
   const [description, setDescription] = useState('')
 
+  const value=()=>currentQuestion/tasks.length;
+
   useEffect(async() => {
     const response = await fetch(`http://100.73.198.48:8000/api/test/${id}`)
     const data = await response.json()
@@ -31,6 +33,7 @@ export default function Test() {
       }
       return acc
     }, 0)
+    console.log(results)
     const response = await fetch("http://100.73.198.48:8000/api/test/user", {
       headers: {
         "Content-Type": "application/json",
@@ -40,7 +43,7 @@ export default function Test() {
       body: JSON.stringify({
         user: getUser().id,
         test: id,
-        result: results
+        result: Math.ceil(results*100/tasks.length)
       })
     })
   };
@@ -69,7 +72,7 @@ export default function Test() {
       )}
       {stage === "in progress" && (
         <div>
-          <NavigationProgress color="green" initialProgress={10} />
+          <NavigationProgress color="green" initialProgress={50} />
           <Row>
             <Col md={4}>
               <Card shadow="sm" padding="lg" radius="md" withBorder>
@@ -104,7 +107,7 @@ export default function Test() {
                   color="green"
                   radius="xs"
                   size="xl"
-                  value={50}
+                  value={value*100}
                   striped
                   animate
                 />
