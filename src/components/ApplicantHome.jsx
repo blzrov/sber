@@ -6,8 +6,17 @@ import PublicTwoToneIcon from "@mui/icons-material/PublicTwoTone";
 import KeyboardDoubleArrowUpTwoToneIcon from "@mui/icons-material/KeyboardDoubleArrowUpTwoTone";
 import { Link } from "react-router-dom";
 import { Title, Text, Button } from "@mantine/core";
+import { useState, useEffect } from "react";
 
 export default function ApplicantHome() {
+  const [vacancy, setVacancy] = useState({});
+
+  // useEffect(async () => {
+  //   const response = await fetch(`http://100.73.198.48:8000/api/vacancy/${id}/`);
+  //   const data = await response.json();
+  //   setVacancy(data);
+  // }, []);
+
   return (
     <div>
       <Row className="my-5">
@@ -16,6 +25,7 @@ export default function ApplicantHome() {
             <Row>
               <Col style={{ textAlign: "center" }}>
                 <h3>Мой рейтинг</h3>
+                <h3>5</h3>
               </Col>
               <Col className="d-flex justify-content-center">
                 <RingProgress
@@ -31,7 +41,7 @@ export default function ApplicantHome() {
               </Col>
               <Col style={{ textAlign: "center" }}>
                 <h3>Выполнено заказов:</h3>
-                <h3>55</h3>
+                <h3>0</h3>
               </Col>
             </Row>
           </Card>

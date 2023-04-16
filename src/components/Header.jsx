@@ -12,6 +12,9 @@ import PriceChangeIcon from "@mui/icons-material/PriceChange";
 import SupportAgentIcon from "@mui/icons-material/SupportAgent";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import HomeIcon from "@mui/icons-material/Home";
+import { Popover, Text, Button } from "@mantine/core";
+import { IconBellPlusFilled } from "@tabler/icons-react";
+import { Spoiler } from "@mantine/core";
 
 export default function Header() {
   const user = getUser();
@@ -26,13 +29,13 @@ export default function Header() {
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="me-auto">
-          {user?.role === roles.applicant && (
+          {/* {user?.role === roles.applicant && (
             <Nav.Link>
               <Link to="/employers">
                 <LocationCityIcon /> Компании
               </Link>
             </Nav.Link>
-          )}
+          )} */}
           {user?.role === roles.applicant && (
             <Nav.Link>
               <Link to="/vacancies">
@@ -89,6 +92,34 @@ export default function Header() {
           )} */}
         </Nav>
         <Nav>
+          {user && (
+            <Nav.Link style={{ paddingBottom: "8px" }}>
+              <Popover width={600} position="bottom" withArrow shadow="md">
+                <Popover.Target>
+                  <Button variant="white" leftIcon={<IconBellPlusFilled />}>
+                    + 5
+                  </Button>
+                </Popover.Target>
+                <Popover.Dropdown>
+                  <Spoiler maxHeight={24} showLabel="Прочитать полностью" hideLabel="Скрыть">
+                    <Text size="sm">
+                      This is uncont uncontrolled popover, it is opened when button uncontrolled popover, it is opened
+                      when button rolled popover, it is opened when button is clicked
+                    </Text>
+                  </Spoiler>
+                  <hr />
+                  <Text size="sm">This is uncontrolled popover, it is opened when button is clicked</Text>
+                  <hr />
+                  <Text size="sm">This is uncontrolled popover, it is opened when button is clicked</Text>
+                  <hr />
+                  <Text size="sm">This is uncontrolled popover, it is opened when button is clicked</Text>
+                  <hr />
+                  <Text size="sm">This is uncontrolled popover, it is opened when button is clicked</Text>
+                  <hr />
+                </Popover.Dropdown>
+              </Popover>
+            </Nav.Link>
+          )}
           {!user && (
             <Nav.Link>
               <Link to="/auth">Авторизация</Link>
