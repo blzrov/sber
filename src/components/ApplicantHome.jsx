@@ -11,11 +11,11 @@ import { useState, useEffect } from "react";
 export default function ApplicantHome() {
   const [vacancy, setVacancy] = useState({});
 
-  // useEffect(async () => {
-  //   const response = await fetch(`http://100.73.198.48:8000/api/vacancy/${id}/`);
-  //   const data = await response.json();
-  //   setVacancy(data);
-  // }, []);
+  useEffect(async () => {
+    const response = await fetch(`http://100.73.198.48:8000/api/vacancy/${15}/`);
+    const data = await response.json();
+    setVacancy(data);
+  }, []);
 
   return (
     <div>
@@ -49,7 +49,7 @@ export default function ApplicantHome() {
       </Row>
       <Row>
         <Col>
-          <Link to="/employers">
+          <Link to="/vacancies">
             <Card
               shadow="sm"
               className="d-flex flex-column-reverse align-items-center justify-content-center"
@@ -107,10 +107,10 @@ export default function ApplicantHome() {
         </Col>
       </Row>
       <Card shadow="sm" padding="lg" radius="md" withBorder className="my-3 d-flex flex-column">
-        <Title order={2}>Название</Title>
-        <Text mb="xs">100000 р/мес</Text>
-        <Text mb="sm">Описание</Text>
-        <Link to="/vacancy-card/1">
+        <Title order={2}>{vacancy.name}</Title>
+        <Text mb="xs">{vacancy.salary} р/мес</Text>
+        <Text mb="sm">{vacancy.descr}</Text>
+        <Link to={`/vacancy-card/${vacancy.id}`}>
           <Button color="green" size="md">
             Перейти
           </Button>
