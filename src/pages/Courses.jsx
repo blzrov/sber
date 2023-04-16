@@ -3,16 +3,19 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { TextInput } from "@mantine/core";
 import { Row, Col } from "react-bootstrap";
+import { Skeleton } from "@mantine/core";
 
 export default function Courses() {
   const navigate = useNavigate();
   const [courses, setCourses] = useState([]);
   const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(async () => {
     const response = await fetch("http://100.73.198.48:8000/api/tests/");
     const data = await response.json();
     setCourses(data);
+    setLoading(false);
   }, []);
 
   return (
@@ -31,6 +34,16 @@ export default function Courses() {
         </Col>
       </Row>
       <Card shadow="sm" padding="lg" radius="md" withBorder>
+        {loading && (
+          <SimpleGrid cols={3} spacing="xl">
+            <Skeleton height={200} mb="xl" />
+            <Skeleton height={200} mb="xl" />
+            <Skeleton height={200} mb="xl" />
+            <Skeleton height={200} mb="xl" />
+            <Skeleton height={200} mb="xl" />
+            <Skeleton height={200} mb="xl" />
+          </SimpleGrid>
+        )}
         <SimpleGrid cols={3} spacing="xl">
           {courses
             .filter((e) => e.name?.toLowerCase().includes(search) || e.descr?.toLowerCase().includes(search))

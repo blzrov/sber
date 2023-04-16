@@ -107,7 +107,7 @@ export default function Test() {
                   color="green"
                   radius="xs"
                   size="xl"
-                  value={value*100}
+                  value={50}
                   striped
                   animate
                 />
