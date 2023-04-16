@@ -1,23 +1,33 @@
 import { Row, Col } from "react-bootstrap";
-import { Text, Title, Tabs, SimpleGrid, Card, Button } from "@mantine/core";
+import { Text, Title, Tabs, SimpleGrid, Card, Button, Modal } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
+import { useToasts } from "react-toast-notifications";
+import { useDisclosure } from "@mantine/hooks";
+import { Rating } from "@mantine/core";
 
 export default function CustomerProfile() {
   const navigate = useNavigate();
+  const [opened, { open, close }] = useDisclosure(false);
 
   return (
     <div>
+      <Modal opened={opened} onClose={close} title="Оценить исполнителя">
+        <Rating defaultValue={2} count={10} />
+        <Button className="mt-3" compact onClick={close}>
+          Сохранить
+        </Button>
+      </Modal>
       <Row className="mb-4">
-        <Col md={10}>
+        <Col md={8}>
           <Title order={1} className="mb-1">
             Сбербанк
           </Title>
           <Text mb="xs">ФИО Заказчика</Text>
         </Col>
-        <Col md={2}>
+        <Col md={4}>
           <Button onClick={() => navigate("/customer/edit")} color="green">
-            Редакировать профиль
-          </Button>
+            Редактировать профиль
+          </Button>{" "}
           <Button onClick={() => navigate("/create-order")} color="green">
             Создать заказ
           </Button>
@@ -37,7 +47,6 @@ export default function CustomerProfile() {
             <Tabs.Tab value="actual">Акутальные заказы</Tabs.Tab>
             <Tabs.Tab value="history">История заказов</Tabs.Tab>
           </Tabs.List>
-
           <Tabs.Panel value="actual">
             <SimpleGrid cols={1} mt="xl">
               <Card shadow="sm" padding="lg" radius="md" withBorder>
@@ -57,7 +66,8 @@ export default function CustomerProfile() {
                   }}
                 >
                   Подробнее
-                </Button>
+                </Button>{" "}
+                <Button variant="outline">Перенести в неактуальное</Button>
               </Card>
             </SimpleGrid>
           </Tabs.Panel>
@@ -73,7 +83,7 @@ export default function CustomerProfile() {
                   qui labore.
                 </Text>
                 <Text mb="md">Исполнитель</Text>
-                <Button>Оценить</Button>
+                <Button onClick={open}>Оценить исполнителя</Button>
               </Card>
             </SimpleGrid>
           </Tabs.Panel>

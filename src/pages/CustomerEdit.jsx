@@ -3,12 +3,26 @@ import { Title, Tabs, SimpleGrid, Card, Button } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
 import { TextInput, Textarea, Checkbox, Group, Text, rem, MultiSelect } from "@mantine/core";
 import { useState } from "react";
+import { getUser } from "../helpers/user";
+import { useToasts } from "react-toast-notifications";
 
 export default function CustomerProfile() {
+  const { addToast } = useToasts();
   const [info, setInfo] = useState({});
 
-  function onSubmit() {
-    console.log(info);
+  async function onSubmit() {
+    const response = await fetch("http://100.73.198.48:8000/api/user/", {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      method: "PATCH",
+      body: JSON.stringify({ ...info, id: getUser()?.id }),
+    });
+    addToast("Сохранено", {
+      appearance: "success",
+      autoDismiss: true,
+    });
   }
 
   return (

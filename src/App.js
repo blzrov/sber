@@ -24,6 +24,7 @@ import VacancyCard from "./pages/VacancyCard";
 import Orders from "./pages/Orders";
 import CustomerEdit from "./pages/CustomerEdit";
 import EmployerEdit from "./pages/EmployerEdit";
+import { ToastProvider } from "react-toast-notifications";
 
 export default function App() {
   const navigate = useNavigate();
@@ -34,6 +35,7 @@ export default function App() {
   }, []);
 
   return (
+    <ToastProvider autoDismiss autoDismissTimeout={4000} placement="top-right">
       <Container className="App">
         <div className="App">
           <Header />
@@ -61,5 +63,6 @@ export default function App() {
           </Routes>
         </div>
       </Container>
+    </ToastProvider>
   );
 }

@@ -1,6 +1,7 @@
-import { NumberInput, TextInput, Button } from "@mantine/core";
+import { NumberInput, TextInput, Textarea, Button } from "@mantine/core";
 import { DateInput } from "@mantine/dates";
 import { useForm } from "@mantine/form";
+import { async } from "q";
 import { Row, Col } from "react-bootstrap";
 
 export default function CreateOrder() {
@@ -12,42 +13,35 @@ export default function CreateOrder() {
       description: "",
     },
     validate: {
-        name: (value) => value.length > 0 ? null : 'Введите название заказа'
-    }
+      name: (value) => (value.length > 0 ? null : "Введите название заказа"),
+    },
   });
 
   return (
     <div>
       <Row>
         <Col md={4} className="mx-auto">
-            <h3 className="text-center">Создать заказ</h3>
+          <h3 className="text-center">Создать заказ</h3>
           <form
-            onSubmit={form.onSubmit((values) => {
-              console.log(values);
-              form.reset()
+            onSubmit={form.onSubmit(async (values) => {
+              const response = await fetch("http://100.73.198.48:8000/api/order/", {
+                headers: {
+                  "Content-Type": "application/json",
+                  Accept: "application/json",
+                },
+                method: "POST",
+                body: JSON.stringify(values),
+              });
             })}
             className="d-flex flex-column gap-3"
           >
-            <TextInput
-              label="Название заказа"
-              {...form.getInputProps("name")}
-            ></TextInput>
+            <TextInput label="Название заказа" {...form.getInputProps("name")}></TextInput>
 
-            <NumberInput
-              placeholder="0"
-              label="Стоимость"
-              {...form.getInputProps("price")}
-            ></NumberInput>
+            <NumberInput placeholder="0" label="Стоимость" {...form.getInputProps("price")}></NumberInput>
 
-            <DateInput
-              label="Срок выполнения"
-              {...form.getInputProps("deadline")}
-            ></DateInput>
+            <DateInput label="Срок выполнения" {...form.getInputProps("deadline")}></DateInput>
 
-            <TextInput
-              label="Описание"
-              {...form.getInputProps("description")}
-            ></TextInput>
+            <Textarea autosize multiple label="Описание" {...form.getInputProps("description")}></Textarea>
 
             <Button type="submit" color="green">
               Создать заказ

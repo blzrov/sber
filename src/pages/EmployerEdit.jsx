@@ -4,8 +4,10 @@ import { IconUpload } from "@tabler/icons-react";
 import { useState, useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
 import { getUser } from "../helpers/user";
+import { useToasts } from "react-toast-notifications";
 
 export default function EmployerEdit() {
+  const { addToast } = useToasts();
   const [info, setInfo] = useState({});
 
   useEffect(async () => {
@@ -33,12 +35,15 @@ export default function EmployerEdit() {
       method: "PATCH",
       body: JSON.stringify({ ...info, id: getUser().id }),
     });
-    
+    addToast("Сохранено", {
+      appearance: "success",
+      autoDismiss: true,
+    });
   }
 
   return (
     <div>
-      <Row>      
+      <Row>
         <Col>
           <h4>Фото</h4>
           <Dropzone

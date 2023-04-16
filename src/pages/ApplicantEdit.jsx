@@ -8,8 +8,10 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import WorkExpItem from "../components/WorkExpItem";
 import { getUser } from "../helpers/user";
+import { useToasts } from "react-toast-notifications";
 
 export default function ApplicantEdit() {
+  const { addToast } = useToasts();
   const navigate = useNavigate();
   const [info, setInfo] = useState({ experience: [{}] });
   const [skills, setSkills] = useState([]);
@@ -43,6 +45,10 @@ export default function ApplicantEdit() {
       },
       method: "PATCH",
       body: JSON.stringify(data),
+    });
+    addToast("Сохранено", {
+      appearance: "success",
+      autoDismiss: true,
     });
   }
 

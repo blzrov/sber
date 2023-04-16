@@ -27,7 +27,7 @@ export default function EmployerProfile() {
         <Col md={7}>
           <div className="d-flex justify-content-between">
             <h1 className="mb-3">{data.name}</h1>
-            {getUser().id == id && (
+            {getUser()?.id == id && (
               <Link to="/employer/edit">
                 <Button variant="light">Редактировать профиль</Button>
               </Link>
