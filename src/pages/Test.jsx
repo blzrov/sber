@@ -17,22 +17,23 @@ export default function Test() {
 
   const value=()=>currentQuestion/tasks.length;
 
-  useEffect(async () => {
-    const response = await fetch(`http://100.73.198.48:8000/api/test/${id}`);
-    const data = await response.json();
-    console.log(data);
-    setName(data.name);
-    setTasks(data.tasks);
-    setDescription(data.descr);
-  }, []);
+  useEffect(async() => {
+    const response = await fetch(`http://100.73.198.48:8000/api/test/${id}`)
+    const data = await response.json()
+    console.log(data)
+    setName(data.name)
+    setTasks(data.tasks)
+    setDescription(data.descr)
+  }, [])
 
   async function sendResults() {
     const results = answers.reduce((acc, curr, idx) => {
-      if (curr.value === tasks[curr.index].correct_answer) {
-        acc += 1;
+      if (curr.value === tasks[curr.index].correct_answer){
+        acc += 1
       }
       return acc
     }, 0)
+    console.log(results*100/tasks.length)
     const response = await fetch("http://100.73.198.48:8000/api/test/user", {
       headers: {
         "Content-Type": "application/json",
@@ -42,7 +43,7 @@ export default function Test() {
       body: JSON.stringify({
         user: getUser().id,
         test: id,
-        result: results
+        result: Math.ceil(results*100/tasks.length)
       })
     })
   };
@@ -59,7 +60,9 @@ export default function Test() {
           <SimpleGrid cols={1}>
             <Card shadow="sm" padding="lg" radius="md" withBorder>
               <h3 className="text-center">{name}</h3>
-              <p>{description}</p>
+              <p>
+                {description}
+              </p>
               <Button color="green" onClick={() => setStage("in progress")}>
                 Начать тест
               </Button>
@@ -159,11 +162,7 @@ export default function Test() {
                     setTouched(true);
                     if (currentAnswer) {
                       if (
-                        !answers
-                          .map((v) => v.index)
-                          .includes(currentQuestion) ||
-                        answers.find((v) => v.index === currentQuestion)
-                          ?.value != currentAnswer
+                        !answers.map((v) => v.index).includes(currentQuestion) || answers.find((v) => v.index === currentQuestion)?.value != currentAnswer
                       ) {
                         setAnswers([
                           ...answers.filter((v) => v.index !== currentQuestion),
@@ -183,7 +182,7 @@ export default function Test() {
                         setCurrentQuestion(currentQuestion + 1);
                       } else {
                         setStage("completed");
-                        sendResults();
+                        sendResults()
                       }
                     }
                   }}
@@ -208,31 +207,12 @@ export default function Test() {
             <Col>
               <Card shadow="sm" padding="lg" radius="md" withBorder>
                 <h2 className="text-center">Результаты</h2>
-                <p className="mx-auto text-center" style={{fontSize: '24px', width: '65%'}}>
-                  Вы набрали:{" "}
-                  {answers.reduce((acc, curr, idx) => {
-                    if (curr.value === tasks[curr.index].correct_answer) {
-                      acc += 1;
-                    }
-                    return acc;
-                  }, 0)}{" "}
-                  из {tasks.length} баллов.{" "}
-                  {(answers.reduce((acc, curr, idx) => {
-                    if (curr.value === tasks[curr.index].correct_answer) {
-                      acc += 1;
-                    }
-                    return acc;
-                  }, 0) /
-                    tasks.length) *
-                    100 >=
-                  60 ? (
-                    <span style={{ color: "#34C924" }}>
-                      Поздравляем! Вы успешно прошли тест. Вы будете рекомендованы работодателям.
-                    </span>
-                  ) : (
-                    <span style={{color: 'crimson'}}>К сожалению вы провалили тест! Предлагаем найти ментора на нашей платформе.</span>
-                  )}
-                </p>
+                <p>Вы набрали: {answers.reduce((acc, curr, idx) => {
+                  if (curr.value === tasks[curr.index].correct_answer){
+                    acc += 1
+                  }
+                  return acc
+                }, 0)} из {tasks.length} баллов</p>
               </Card>
             </Col>
           </Row>
