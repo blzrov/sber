@@ -15,6 +15,7 @@ export default function ApplicantProfile() {
     const response = await fetch(`http://100.73.198.48:8000/api/user/${id}`);
     const data = await response.json();
     setInfo(data);
+    console.log(data)
   }, []);
 
   return (
@@ -26,14 +27,16 @@ export default function ApplicantProfile() {
             <h3>Личная информация</h3>
             {getUser().id == id && <Button onClick={() => navigate("/applicant/edit")}>Редактировать профиль</Button>}
           </div>
-          <div>{`${info.surname} ${info.name} ${info.patronymic}`}</div>
-          <div>Возраст</div>
+          <div style={{fontSize: '20px'}}>{`${info.surname} ${info.name} ${info.patronymic}`}</div>
+          <div style={{color: 'gray'}}>Возраст</div>
         </Col>
       </Row>
       <Row className="mb-2">
         <h3>Подробнее о вас</h3>
-        <div>О себе</div>
-        <div>Ваши навыки</div>
+        <div><b>О себе:</b> {info.descr}</div>
+        <div><b>Ваши навыки:</b></div>
+        <div><b>Город:</b> {info.city}</div>
+        <div><b>Профессия:</b> {info.profession}</div>
       </Row>
       <Row className="mb-2">
         <h3>Образование</h3>
