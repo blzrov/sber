@@ -24,7 +24,7 @@ export default function ApplicantHome() {
           <Card shadow="sm" padding="lg" radius="md" withBorder>
             <Row>
               <Col style={{ textAlign: "center" }}>
-                <h3>Мой рейтинг</h3>
+                <h3>Мой рейтинг:</h3>
                 <h3>5</h3>
               </Col>
               <Col className="d-flex justify-content-center">

@@ -37,7 +37,7 @@ export default function Courses() {
             .map((v, i) => (
               <Card shadow="sm" padding="lg" radius="md" withBorder className="d-flex flex-column" key={i}>
                 <Card.Section mb="xs">
-                  <Image height={200} />
+                  <Image src={v.img} height={200} />
                 </Card.Section>
                 <Title order={2} mb="sm">
                   {v.name}

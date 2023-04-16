@@ -4,12 +4,13 @@ import { Row, Col } from "react-bootstrap";
 import { useParams } from "react-router";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { maxWidth } from "@material-ui/system";
-import { async } from "q";
+import { getUser, roles } from "../helpers/user";
+import { useToasts } from "react-toast-notifications";
 
 export default function VacancyCard() {
   const [data, setData] = useState({});
   const { id } = useParams();
+  const { addToast } = useToasts();
 
   useEffect(async () => {
     const response = await fetch(`http://100.73.198.48:8000/api/vacancy/${id}/`);
@@ -17,7 +18,21 @@ export default function VacancyCard() {
     setData(data);
   }, []);
 
-  async function onRespond() {}
+  async function onRespond() {
+    const response = await fetch("http://100.73.198.48:8000/api/applicant/employer", {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      method: "POST",
+      body: JSON.stringify({ applicant: getUser()?.id, vacancy: data.id }),
+    });
+    const result = await response.json();
+    addToast("Отклик отправлен", {
+      appearance: "success",
+      autoDismiss: true,
+    });
+  }
 
   return (
     <div>
@@ -32,9 +47,11 @@ export default function VacancyCard() {
           <h1>{data.name}</h1>
           <h3>{data.salary}р./мес.</h3>
           <p style={{ fontSize: "1.5rem", fontWeight: "600" }}>{data.descr}</p>
-          <Button onClick={onRespond} color="green" className="w-100">
-            Откликнуться
-          </Button>
+          {getUser()?.role === roles.applicant && (
+            <Button onClick={onRespond} color="green" className="w-100">
+              Откликнуться
+            </Button>
+          )}
         </Col>
       </Row>
     </div>
