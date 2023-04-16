@@ -15,28 +15,40 @@ export default function ApplicantProfile() {
     const response = await fetch(`http://100.73.198.48:8000/api/user/${id}`);
     const data = await response.json();
     setInfo(data);
-    console.log(data)
+    console.log(data);
   }, []);
 
   return (
     <div>
       <Row>
-        <Col md={4}>Картинка</Col>
-        <Col md={8}>
+        <Col md={3}>
+          <div>
+            <img src={info.img} height={200} />
+          </div>
+        </Col>
+        <Col md={9}>
           <div className="d-flex justify-content-between">
             <h3>Личная информация</h3>
-            {getUser().id == id && <Button onClick={() => navigate("/applicant/edit")}>Редактировать профиль</Button>}
+            {getUser()?.id == id && <Button onClick={() => navigate("/applicant/edit")}>Редактировать профиль</Button>}
           </div>
-          <div style={{fontSize: '20px'}}>{`${info.surname} ${info.name} ${info.patronymic}`}</div>
-          <div style={{color: 'gray'}}>Возраст</div>
+          <div style={{ fontSize: "20px" }}>{`${info.surname} ${info.name} ${info.patronymic}`}</div>
+          <div style={{ color: "gray" }}>Возраст</div>
         </Col>
       </Row>
       <Row className="mb-2">
         <h3>Подробнее о вас</h3>
-        <div><b>О себе:</b> {info.descr}</div>
-        <div><b>Ваши навыки:</b></div>
-        <div><b>Город:</b> {info.city}</div>
-        <div><b>Профессия:</b> {info.profession}</div>
+        <div>
+          <b>О себе:</b> {info.descr}
+        </div>
+        <div>
+          <b>Ваши навыки:</b>
+        </div>
+        <div>
+          <b>Город:</b> {info.city}
+        </div>
+        <div>
+          <b>Профессия:</b> {info.profession}
+        </div>
       </Row>
       <Row className="mb-2">
         <h3>Образование</h3>

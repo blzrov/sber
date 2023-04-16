@@ -55,10 +55,10 @@ export default function App() {
             <Route path="/customer/:id" element={<CustomerProfile />} />
             <Route path="/customer/edit" element={<CustomerEdit />} />
             <Route path="/vacancy/new" element={<CreateVacancy />} />
-            <Route path="/vacancys" element={<Vacancys />} />
+            <Route path="/vacancies" element={<Vacancys />} />
             <Route path="/create-order" element={<CreateOrder />} />
             <Route path="/mentor/:id" element={<MentorProfile />} />
-            <Route path="/mentor/edit" element={<MentorEdit/>}/>
+            <Route path="/mentor/edit" element={<MentorEdit />} />
             <Route path="/order-card/:id" element={<OrderCard />} />
             <Route path="/orders" element={<Orders />} />
             <Route path="/vacancy-card/:id" element={<VacancyCard />} />
