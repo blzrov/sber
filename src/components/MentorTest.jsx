@@ -14,7 +14,7 @@ export default function EmployerTests({ applicant, id }) {
 
   return (
     <div>
-      {tests.map((v) => ( v.is_passed ?
+      {tests.map((v) => ( !v.is_passed ?
         <Card shadow="sm" padding="lg" radius="md" withBorder>
             <h4 className="text-center mb-3">
             {applicant.name} {applicant.surname} {applicant.patronymic}
@@ -31,9 +31,9 @@ export default function EmployerTests({ applicant, id }) {
                 ))}
             </Col>
             </Row>
-            <Row style={{backgroundColor: 'rgba(0,255,0,0.35)', borderRadius: '10px', padding: '5px', marginTop: '5px'}}>
+            <Row style={{backgroundColor: 'rgba(255,0,0,0.35)', borderRadius: '10px', padding: '5px', marginTop: '5px'}}>
                 <Col className="d-flex align-items-center" md={9}><b>{v.name}:</b></Col>
-                <Col className="d-flex align-items-center" md={3}><span>Успешно</span></Col>
+                <Col className="d-flex align-items-center" md={3}><span>Провален</span></Col>
             </Row>
         </Card> : <></>
       ))}
