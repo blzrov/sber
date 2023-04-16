@@ -19,7 +19,7 @@ export default function Courses() {
     <div>
       <Row className="mb-4">
         <Col md={4}>
-          <h3>Тесты</h3>
+          <h3>Все тесты</h3>
         </Col>
         <Col md={8} style={{ textAlign: "center" }}>
           <TextInput
@@ -30,36 +30,26 @@ export default function Courses() {
           />
         </Col>
       </Row>
-      <SimpleGrid cols={3} spacing="xl">
-        {courses.filter((e) => e.name?.toLowerCase().includes(search)).map((v, i) => (
-          <Card
-            shadow="sm"
-            padding="lg"
-            radius="md"
-            withBorder
-            className="d-flex flex-column"
-            key={i}
-          >
-            <Card.Section mb="xs">
-              <Image height={200} />
-            </Card.Section>
-            <Title order={2} mb="sm">
-              {v.name}
-            </Title>
-            <Text className="mb-2">
-              {v.descr}
-            </Text>
-            <Button
-              onClick={() => navigate(`/courses/${v.id}`)}
-              color="green"
-              size="md"
-              className="mt-auto"
-            >
-              Перейти
-            </Button>
-          </Card>
-        ))}
-      </SimpleGrid>
+      <Card shadow="sm" padding="lg" radius="md" withBorder>
+        <SimpleGrid cols={3} spacing="xl">
+          {courses
+            .filter((e) => e.name?.toLowerCase().includes(search) || e.descr?.toLowerCase().includes(search))
+            .map((v, i) => (
+              <Card shadow="sm" padding="lg" radius="md" withBorder className="d-flex flex-column" key={i}>
+                <Card.Section mb="xs">
+                  <Image height={200} />
+                </Card.Section>
+                <Title order={2} mb="sm">
+                  {v.name}
+                </Title>
+                <Text className="mb-2">{v.descr}</Text>
+                <Button onClick={() => navigate(`/courses/${v.id}`)} color="green" size="md" className="mt-auto">
+                  Перейти
+                </Button>
+              </Card>
+            ))}
+        </SimpleGrid>
+      </Card>
     </div>
   );
 }
