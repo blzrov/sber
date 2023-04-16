@@ -5,7 +5,6 @@ import EmployerTests from "./EmployerTest";
 
 export default function EmployerHome() {
   const [applicants, setApplicants] = useState([]);
-  const [tests, setTests] = useState([])
   useEffect(async () => {
     const response = await fetch(
       "http://100.73.198.48:8000/api/users/applicants"

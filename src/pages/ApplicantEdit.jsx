@@ -81,13 +81,13 @@ export default function ApplicantEdit() {
           <h4>Личная информация</h4>
           <TextInput
             onChange={(e) => setInfo((prev) => ({ ...prev, [e.target.name]: e.target.value }))}
-            name="name"
+            name="surname"
             placeholder="Иванов"
             label="Фамилия"
           />
           <TextInput
             onChange={(e) => setInfo((prev) => ({ ...prev, [e.target.name]: e.target.value }))}
-            name="surname"
+            name="name"
             placeholder="Иван"
             label="Имя"
           />
