@@ -6,6 +6,7 @@ import { Dropzone } from "@mantine/dropzone";
 import { IconUpload, IconPhoto, IconX } from "@tabler/icons-react";
 import { Checkbox, Group, Text, rem, MultiSelect } from "@mantine/core";
 import { useToasts } from "react-toast-notifications";
+import {BASE_URL} from "../api";
 
 export default function CreateVacancy() {
   const { addToast } = useToasts();
@@ -23,7 +24,7 @@ export default function CreateVacancy() {
 
   async function handleSubmit() {
     const data = { ...info, id: getUser().id };
-    const response = await fetch("http://100.73.198.48:8000/api/vacancy/", {
+    const response = await fetch(`${BASE_URL}/api/vacancy/`, {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",

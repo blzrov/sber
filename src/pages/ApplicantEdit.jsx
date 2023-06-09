@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import WorkExpItem from "../components/WorkExpItem";
 import { getUser } from "../helpers/user";
 import { useToasts } from "react-toast-notifications";
+import {BASE_URL} from "../api";
 
 export default function ApplicantEdit() {
   const { addToast } = useToasts();
@@ -17,7 +18,7 @@ export default function ApplicantEdit() {
   const [skills, setSkills] = useState([]);
 
   useEffect(async () => {
-    const response = await fetch("http://100.73.198.48:8000/api/skills/");
+    const response = await fetch(`${BASE_URL}/api/skills/`);
     const data = await response.json();
     setSkills(
       data.map((v) => {
@@ -39,7 +40,7 @@ export default function ApplicantEdit() {
   async function handleSubmit() {
     const data = { ...info, id: getUser().id };
     console.log(data)
-    const response = await fetch("http://100.73.198.48:8000/api/user/", {
+    const response = await fetch(`${BASE_URL}/api/user/`, {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",

@@ -7,12 +7,13 @@ import KeyboardDoubleArrowUpTwoToneIcon from "@mui/icons-material/KeyboardDouble
 import { Link } from "react-router-dom";
 import { Title, Text, Button } from "@mantine/core";
 import { useState, useEffect } from "react";
+import {BASE_URL} from "../api";
 
 export default function ApplicantHome() {
   const [vacancy, setVacancy] = useState({});
 
   useEffect(async () => {
-    const response = await fetch(`http://100.73.198.48:8000/api/vacancy/${15}/`);
+    const response = await fetch(`${BASE_URL}/api/vacancy/${15}/`);
     const data = await response.json();
     setVacancy(data);
   }, []);

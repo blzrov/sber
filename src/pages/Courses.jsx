@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { TextInput } from "@mantine/core";
 import { Row, Col } from "react-bootstrap";
 import { Skeleton } from "@mantine/core";
+import {BASE_URL} from "../api";
 
 export default function Courses() {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ export default function Courses() {
   const [loading, setLoading] = useState(true);
 
   useEffect(async () => {
-    const response = await fetch("http://100.73.198.48:8000/api/tests/");
+    const response = await fetch(`${BASE_URL}/api/tests/`);
     const data = await response.json();
     setCourses(data);
     setLoading(false);

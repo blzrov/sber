@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import {Row, Col} from 'react-bootstrap'
 import {Card, Badge} from '@mantine/core'
+import {BASE_URL} from "../api";
 
 export default function EmployerTests({ applicant, id }) {
   const [tests, setTests] = useState([]);
   useEffect(async () => {
     const response = await fetch(
-      `http://100.73.198.48:8000/api/test/user/${id}`
+      `${BASE_URL}/api/test/user/${id}`
     );
     const data = await response.json();
     setTests(data.tests);

@@ -5,13 +5,14 @@ import { useState, useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
 import { getUser } from "../helpers/user";
 import { useToasts } from "react-toast-notifications";
+import {BASE_URL} from "../api";
 
 export default function EmployerEdit() {
   const { addToast } = useToasts();
   const [info, setInfo] = useState({});
 
   useEffect(async () => {
-    const response = await fetch(`http://100.73.198.48:8000/api/user/${getUser().id}`);
+    const response = await fetch(`${BASE_URL}/api/user/${getUser().id}`);
     const data = await response.json();
     setInfo(data);
   }, []);

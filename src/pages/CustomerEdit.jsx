@@ -5,13 +5,14 @@ import { TextInput, Textarea, Checkbox, Group, Text, rem, MultiSelect } from "@m
 import { useState } from "react";
 import { getUser } from "../helpers/user";
 import { useToasts } from "react-toast-notifications";
+import {BASE_URL} from "../api";
 
 export default function CustomerProfile() {
   const { addToast } = useToasts();
   const [info, setInfo] = useState({});
 
   async function onSubmit() {
-    const response = await fetch("http://100.73.198.48:8000/api/user/", {
+    const response = await fetch(`${BASE_URL}/api/user/`, {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",

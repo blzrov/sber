@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { Row } from "react-bootstrap";
 import { Col } from "react-bootstrap";
 import { Skeleton } from "@mantine/core";
+import {BASE_URL} from "../api";
 
 export default function Vacancys() {
   const [data, setData] = useState([]);
@@ -13,11 +14,11 @@ export default function Vacancys() {
   const [loading, setLoading] = useState(true);
 
   useEffect(async () => {
-    const response = await fetch("http://100.73.198.48:8000/api/vacancies/");
+    const response = await fetch(`${BASE_URL}/api/vacancies/`);
     const data = await response.json();
     setData(data);
     setLoading(false);
-    // const response2 = await fetch("http://100.73.198.48:8000/api/skills/");
+    // const response2 = await fetch(`${BASE_URL}/api/skills/`);
     // const data2 = await response2.json();
     // setSkills(
     //   data2.map((v) => {

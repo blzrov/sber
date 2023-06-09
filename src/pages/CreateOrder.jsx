@@ -3,6 +3,7 @@ import { DateInput } from "@mantine/dates";
 import { useForm } from "@mantine/form";
 import { async } from "q";
 import { Row, Col } from "react-bootstrap";
+import {BASE_URL} from "../api";
 
 export default function CreateOrder() {
   const form = useForm({
@@ -24,7 +25,7 @@ export default function CreateOrder() {
           <h3 className="text-center">Создать заказ</h3>
           <form
             onSubmit={form.onSubmit(async (values) => {
-              const response = await fetch("http://100.73.198.48:8000/api/order/", {
+              const response = await fetch(`${BASE_URL}/api/order/`, {
                 headers: {
                   "Content-Type": "application/json",
                   Accept: "application/json",

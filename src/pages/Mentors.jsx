@@ -3,12 +3,13 @@ import MaterialTable from "material-table";
 import { localization, icons, options } from "../helpers/table";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import {BASE_URL} from "../api";
 
 export default function Applicants() {
   const [data, setData] = useState([]);
 
   //   useEffect(async () => {
-  //     const response = await fetch("http://100.73.198.48:8000/api/users/applicants");
+  //     const response = await fetch(`${BASE_URL}/api/users/applicants`);
   //     const data = await response.json();
   //     console.log(data);
   //     setData(data);

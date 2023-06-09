@@ -4,15 +4,16 @@ import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getUser } from "../helpers/user";
+import {BASE_URL} from "../api";
 
 export default function EmployerProfile() {
   const { id } = useParams();
   const [data, setData] = useState({});
 
   useEffect(async () => {
-    const response = await fetch(`http://100.73.198.48:8000/api/user/${id}`);
+    const response = await fetch(`${BASE_URL}/api/user/${id}`);
     const data = await response.json();
-    const response2 = await fetch(`http://100.73.198.48:8000/api/user/${id}/vacancies`);
+    const response2 = await fetch(`${BASE_URL}/api/user/${id}/vacancies`);
     const data2 = await response2.json();
     data.vacancies = data2;
     setData(data);

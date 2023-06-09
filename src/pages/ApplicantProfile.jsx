@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getUser } from "../helpers/user";
 import { Skeleton,SimpleGrid } from "@mantine/core";
+import {BASE_URL} from "../api";
 
 export default function ApplicantProfile() {
   const [info, setInfo] = useState({});
@@ -14,7 +15,7 @@ export default function ApplicantProfile() {
   const [loading, setLoading] = useState(true);
 
   useEffect(async () => {
-    const response = await fetch(`http://100.73.198.48:8000/api/user/${id}`);
+    const response = await fetch(`${BASE_URL}/api/user/${id}`);
     const data = await response.json();
     setInfo(data);
     console.log(data);

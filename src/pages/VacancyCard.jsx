@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getUser, roles } from "../helpers/user";
 import { useToasts } from "react-toast-notifications";
+import {BASE_URL} from "../api";
 
 export default function VacancyCard() {
   const [data, setData] = useState({});
@@ -13,13 +14,13 @@ export default function VacancyCard() {
   const { addToast } = useToasts();
 
   useEffect(async () => {
-    const response = await fetch(`http://100.73.198.48:8000/api/vacancy/${id}/`);
+    const response = await fetch(`${BASE_URL}/api/vacancy/${id}/`);
     const data = await response.json();
     setData(data);
   }, []);
 
   async function onRespond() {
-    const response = await fetch("http://100.73.198.48:8000/api/applicant/employer", {
+    const response = await fetch(`${BASE_URL}/api/applicant/employer`, {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",

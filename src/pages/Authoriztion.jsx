@@ -4,6 +4,7 @@ import { Button, Select } from "@mantine/core";
 import { Row, Col } from "react-bootstrap";
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import {BASE_URL} from "../api";
 
 export default function Authorization() {
   const navigate = useNavigate();
@@ -56,7 +57,7 @@ export default function Authorization() {
             <h2 className="text-center">Вход</h2>
             <form
               onSubmit={authForm.onSubmit(async (values) => {
-                const response = await fetch("http://100.73.198.48:8000/api/auth/login/", {
+                const response = await fetch(`${BASE_URL}/api/auth/login/`, {
                   headers: {
                     "Content-Type": "application/json",
                     Accept: "application/json",
@@ -112,7 +113,7 @@ export default function Authorization() {
             <h2 className="text-center">Регистрация</h2>
             <form
               onSubmit={registrationForm.onSubmit(async (values) => {
-                const response = await fetch("http://100.73.198.48:8000/api/auth/registration/", {
+                const response = await fetch(`${BASE_URL}/api/auth/registration/`, {
                   headers: {
                     "Content-Type": "application/json",
                     Accept: "application/json",

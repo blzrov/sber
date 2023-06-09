@@ -7,6 +7,7 @@ import { Progress } from "@mantine/core";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { getUser } from "../helpers/user";
+import {BASE_URL} from "../api";
 
 export default function Test() {
   const [stage, setStage] = useState("not started");
@@ -18,7 +19,7 @@ export default function Test() {
   const value = () => currentQuestion / tasks.length;
 
   useEffect(async () => {
-    const response = await fetch(`http://100.73.198.48:8000/api/test/${id}`);
+    const response = await fetch(`${BASE_URL}/api/test/${id}`);
     const data = await response.json();
     console.log(data);
     setName(data.name);
@@ -34,7 +35,7 @@ export default function Test() {
       return acc;
     }, 0);
     console.log((results * 100) / tasks.length);
-    const response = await fetch("http://100.73.198.48:8000/api/test/user", {
+    const response = await fetch(`${BASE_URL}/api/test/user`, {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
